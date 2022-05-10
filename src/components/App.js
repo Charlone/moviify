@@ -4,14 +4,12 @@ import Nav from "./common/Nav";
 
 function App() {
   return (
-    <div className={"container-fluid"}>
-      <BrowserRouter>
-        <Nav />
-          <Routes>
-            <Route exact path="/" />
-          </Routes>
-      </BrowserRouter>
-    </div>
+  <BrowserRouter>
+    <Nav />
+      <Routes>
+        <Route exact path="/" />
+      </Routes>
+  </BrowserRouter>
   );
 }
 

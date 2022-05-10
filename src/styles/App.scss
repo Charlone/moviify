@@ -20,9 +20,15 @@ body {
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: #FFFFFF;
+  width: 100vw;
+  background-color: $header-color;
+  border-bottom: .5px solid $border-color;
+  box-shadow: 19px -2px 20px 0 $border-color;
 
   .navbar.navbar-expand-lg.navbar-light {
+    width: 80vw;
+
     .navbar-brand {
       display: flex;
       flex-direction: column;
@@ -31,7 +37,7 @@ body {
       justify-content: center;
       align-items: center;
       line-height: 1rem;
-      color: $header-color;
+      color: $header-font-color;
 
       .logo-main-text {
         font-family: $logo-main-font;
@@ -40,19 +46,48 @@ body {
       .logo-sub-text {
         font-family: $logo-sub-font;
       }
+    }
 
-      .navbar-toggler {
-        color: $header-color;
-      }
+    .navbar-toggler {
+      background-color: $header-font-color;
     }
 
     .nav-link {
-      color: $header-color;
+      color: $font-color;
+
+      .menu-item-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        align-self: center;
+
+        .nav-icon {
+          fill: $header-font-color;
+          width: 25px;
+          height: auto;
+        }
+
+        h6 {
+          font-weight: bold;
+        }
+      }
     }
 
-    .search-input, .search-button {
-      border: 1px solid $header-color;
-      color: $header-color;
+    .search-container {
+      justify-self: flex-end;
+
+      .search-input {
+        border: 1px solid $header-color;
+        color: $header-font-color;
+        padding-right: 2.5rem;
+      }
+
+      .search-button {
+        color: $header-font-color;
+        position: absolute;
+        right: 0;
+      }
     }
   }
 }

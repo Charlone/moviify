@@ -49,7 +49,7 @@ body {
     }
 
     .navbar-toggler {
-      background-color: $header-font-color;
+      background-color: $base-secondary-color;
     }
 
     .nav-link {
@@ -63,7 +63,7 @@ body {
         align-self: center;
 
         .nav-icon {
-          fill: $header-font-color;
+          fill: $base-secondary-color;
           width: 25px;
           height: auto;
         }

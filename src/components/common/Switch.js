@@ -17,7 +17,7 @@ class Switch extends React.Component {
 
     render() {
         return (
-            <div className={"switch-container"}>
+            <div className={"switch-container align-self-end"}>
                 <h6 className={"text-uppercase"}><strong>Movies</strong></h6>
                 <label className="switch">
                     <input type="checkbox" name={"view-requested"} onChange={this.handleOnChange} />

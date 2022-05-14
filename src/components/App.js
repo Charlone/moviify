@@ -9,6 +9,12 @@ function App() {
     <Nav />
       <Routes>
         <Route exact path="/" element={<Home  />} />
+        <Route path="/movies" />
+        <Route path="/movie/:id" />
+        <Route path="/series" />
+        <Route path="/serie/:id" />
+        <Route path="/actors" />
+        <Route path="/actor/:id" />
       </Routes>
   </BrowserRouter>
   );

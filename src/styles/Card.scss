@@ -1,0 +1,28 @@
+@import "utils/variables";
+
+.card {
+  border: 1px solid $base-secondary-color;
+  box-shadow: 1px 1px 5px 0 $blend-color;
+
+  .card-body {
+    .card-title {
+      font-size: medium;
+    }
+
+    .rating {
+      font-size: medium;
+    }
+
+    .card-text {
+      font-size: small;
+    }
+
+    .read-more {
+      font-size: medium;
+      background-color: $header-font-color;
+      color: #FFFFFF;
+      box-shadow: 4px 5px 10px 0 #000;
+      border: 1px solid $blend-color;
+    }
+  }
+}

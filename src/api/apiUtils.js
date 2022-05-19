@@ -8,7 +8,7 @@ export async function handleResponse(response) {
     throw new Error(error);
   }
 
-  throw new Error("Network response was not ok.");
+  throw new Error(`Error: ${response.error.text}`);
 }
 
 export function handleError(error) {

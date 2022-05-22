@@ -1,4 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { connect } from "react-redux";
+import { loadMoviesData } from "../../redux/actions/moviesActions";
+import { loadViewRequested } from "../../redux/actions/viewRequestedActions";
+import PropTypes from "prop-types";
+import { toast } from 'react-toastify';
 import Switch from "../common/Switch";
 import Card from "../common/Card";
 import { Splide, SplideSlide } from '@splidejs/react-splide';
@@ -46,8 +51,22 @@ const CategoryComponent = () => {
     );
 }
 
-const Home = () => {
+const Home = ({viewRequested, movies, loadMoviesData, ...props}) => {
+    const { latest, popular, top, upcoming, movie, images } = movies;
     const [activeSlug, setActiveSlug] = useState('popular');
+
+    useEffect(() => {
+        if (popular.length === 0) {
+            loadMoviesData("popular")
+                .catch(error => toast.error("Could not load movies: " + error, {
+                        position: "top-right",
+                        autoClose: 10000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                    })
+                )
+        }
+    })
 
     const handleOnClick = (e) => {
         setActiveSlug(e.target.dataset.slug);
@@ -107,4 +126,16 @@ const Home = () => {
     );
 }
 
-export default Home;
+function mapStateToProps(state) {
+    return {
+        movies: state.movies,
+        viewRequested: state.viewRequested,
+    }
+}
+
+const mapDispatchToProps = {
+    loadMoviesData,
+    loadViewRequested,
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

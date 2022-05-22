@@ -18,7 +18,7 @@ export const getMovies = async (type, movieId = null) => {
         default: return handleError("No registered endpoint for specified type - " + type);
     }
 
-    await axios.get(baseUrl + path + '?api_key=' + apiKey + '&language=' + language)
+    return await axios.get(baseUrl + path + '?api_key=' + apiKey + '&language=' + language)
         .then(handleResponse)
         .catch(handleError);
 }

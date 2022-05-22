@@ -9,7 +9,7 @@ export function viewRequestDispatcher(dispatch, viewRequested) {
     dispatch(viewRequestedSuccess(viewRequested));
 }
 
-export function viewRequested(viewRequested) {
+export function loadViewRequested(viewRequested) {
     return function (dispatch) {
         dispatch(beginApiCall());
         return viewRequestDispatcher(dispatch, viewRequested)

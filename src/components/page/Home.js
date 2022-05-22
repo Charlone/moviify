@@ -10,6 +10,7 @@ import { Splide, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/react-splide/css';
 import "../../styles/Home.scss";
 import initialState from "../../redux/reducers/initialState";
+import Spinner from "../common/Spinner";
 
 const CategoryComponent = ({cards}) => {
     const sliderOptions = {
@@ -52,12 +53,14 @@ const CategoryComponent = ({cards}) => {
     );
 }
 
-const Home = ({viewRequested, movies, loadMoviesData, ...props}) => {
-    const { latest, popular, top, upcoming, movie, images } = movies;
+const Home = ({viewRequested, movies, loadMoviesData, loadViewRequested}) => {
+    const { nowPlaying, popular, top, upcoming, movie, images } = movies;
     const [activeSlug, setActiveSlug] = useState('popular');
+    const [isLoading, setIsLoading] = useState();
 
     useEffect(() => {
         if (popular.length === 0) {
+            setIsLoading(true);
             loadMoviesData("popular")
                 .catch(error => toast.error("Could not load movies: " + error, {
                         position: "top-right",
@@ -66,10 +69,50 @@ const Home = ({viewRequested, movies, loadMoviesData, ...props}) => {
                         closeOnClick: true,
                     })
                 );
+            setIsLoading(false);
         }
-    })
 
-    const handleOnClick = (e) => {
+        if (nowPlaying.length === 0) {
+            setIsLoading(true);
+            loadMoviesData("nowPlaying")
+                .catch(error => toast.error("Could not load movies: " + error, {
+                        position: "top-right",
+                        autoClose: 10000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                    })
+                );
+            setIsLoading(false);
+        }
+
+        if (top.length === 0) {
+            setIsLoading(true);
+            loadMoviesData("top")
+                .catch(error => toast.error("Could not load movies: " + error, {
+                        position: "top-right",
+                        autoClose: 10000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                    })
+                );
+            setIsLoading(false);
+        }
+
+        if (upcoming.length === 0) {
+            setIsLoading(true);
+            loadMoviesData("upcoming")
+                .catch(error => toast.error("Could not load movies: " + error, {
+                        position: "top-right",
+                        autoClose: 10000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                    })
+                );
+            setIsLoading(false);
+        }
+    }, [nowPlaying, popular, top, upcoming])
+
+    const handleClick = (e) => {
         setActiveSlug(e.target.dataset.slug);
         let categoryToCheck;
 
@@ -79,11 +122,15 @@ const Home = ({viewRequested, movies, loadMoviesData, ...props}) => {
             case "upcoming": categoryToCheck = upcoming; break;
             case "movie": categoryToCheck = movie; break;
             case "images": categoryToCheck = images; break;
-            case "latest": categoryToCheck = latest; break;
+            case "nowPlaying": categoryToCheck = nowPlaying; break;
         }
 
         if (categoryToCheck.length === 0) {
+            setIsLoading(true)
             loadMoviesData(activeSlug)
+                .then(() => {
+                    setIsLoading(false);
+                })
                 .catch(error => toast.error("Could not load movies: " + error, {
                         position: "top-right",
                         autoClose: 10000,
@@ -96,12 +143,11 @@ const Home = ({viewRequested, movies, loadMoviesData, ...props}) => {
 
     const Headers = () => {
         const categoryArray = initialState.headers;
-
         let headers = [];
 
         categoryArray.forEach(categoryTitle => {
             headers.push(
-                <h4 key={categoryTitle.slug} className={"category-header"} onClick={handleOnClick}>
+                <h4 key={categoryTitle.slug} className={"category-header"} onClick={handleClick}>
                     <strong data-slug={categoryTitle.slug}>
                         {categoryTitle.label}
                     </strong>
@@ -122,7 +168,10 @@ const Home = ({viewRequested, movies, loadMoviesData, ...props}) => {
                         </div>
                         <Switch />
                     </div>
-                    {activeSlug === 'popular' && <CategoryComponent cards={popular} />}
+                    {activeSlug === 'popular' && popular.length === 0 ? <Spinner /> : (activeSlug === 'popular' && <CategoryComponent cards={popular} />)}
+                    {activeSlug === 'nowPlaying' && nowPlaying.length === 0 ? <Spinner /> : (activeSlug === 'nowPlaying' && <CategoryComponent cards={nowPlaying} />)}
+                    {activeSlug === 'top' && top.length === 0 ? <Spinner /> : (activeSlug === 'top' && <CategoryComponent cards={top} />)}
+                    {activeSlug === 'upcoming' && upcoming.length === 0 ? <Spinner /> : (activeSlug === 'upcoming' && <CategoryComponent cards={upcoming} />)}
                 </div>
             </section>
         </div>

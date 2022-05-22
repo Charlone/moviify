@@ -2,7 +2,7 @@ const initialState = {
     viewRequested: 'movies',
     apiCallsInProgress: 0,
     movies: {
-        latest: [],
+        nowPlaying: [],
         popular: [],
         top: [],
         upcoming: [],
@@ -15,8 +15,8 @@ const initialState = {
             slug: "popular"
         },
         {
-            label: "latest",
-            slug: "latest"
+            label: "now playing",
+            slug: "nowPlaying"
         },
         {
             label: "top rated",

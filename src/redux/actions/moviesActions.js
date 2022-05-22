@@ -5,8 +5,8 @@ import { beginApiCall, apiCallError } from "./apiStatusActions";
 export function loadPopularMoviesSuccess(popularMovies) {
     return { type: types.GET_POPULAR_MOVIES_SUCCESS, popularMovies }
 }
-export function loadLatestMoviesSuccess(latestMovies) {
-    return { type: types.GET_LATEST_MOVIES_SUCCESS, latestMovies }
+export function loadNowPlayingMoviesSuccess(nowPlayingMovies) {
+    return { type: types.GET_NOW_PLAYING_MOVIES_SUCCESS, nowPlayingMovies }
 }
 export function loadTopMoviesSuccess(topMovies) {
     return { type: types.GET_TOP_MOVIES_SUCCESS, topMovies }
@@ -29,7 +29,7 @@ export function loadMoviesData(type, movieId = null) {
             .getMovies(type, movieId)
             .then((movieData) => {
                 switch (type) {
-                    case "latest": dispatch(loadLatestMoviesSuccess(movieData)); break;
+                    case "nowPlaying": dispatch(loadNowPlayingMoviesSuccess(movieData)); break;
                     case "popular": return dispatch(loadPopularMoviesSuccess(movieData));
                     case "top": dispatch(loadTopMoviesSuccess(movieData)); break;
                     case "upcoming": dispatch(loadUpcomingMoviesSuccess(movieData)); break;

@@ -3,7 +3,6 @@
 .card {
   border: 1px solid $base-secondary-color;
   box-shadow: 1px 1px 5px 0 $blend-color;
-  height: 460px;
 
   .card-body {
     .card-title {
@@ -11,16 +10,14 @@
     }
 
     .rating {
-      font-size: medium;
-    }
-
-    .card-text {
       font-size: small;
     }
 
+    .card-text {
+      font-size: x-small;
+    }
+
     .read-more {
-      position: absolute;
-      bottom: 15px;
       font-size: medium;
       background-color: $header-font-color;
       color: #FFFFFF;
@@ -31,7 +28,18 @@
 }
 
 .splide {
-  .splide__pagination__page {
-    bottom: -10px;
+  .splide__pagination {
+    bottom: unset;
+    margin: 5px;
+
+    .splide__pagination__page {
+      background-color: $blend-color;
+      opacity: .9;
+
+      &.is-active {
+        background-color: $header-font-color;
+        opacity: 1;
+      }
+    }
   }
 }

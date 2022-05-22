@@ -5,8 +5,8 @@ export default function moviesReducer(state = initialState.movies, action) {
     switch (action.type) {
         case types.GET_POPULAR_MOVIES_SUCCESS:
             return Object.assign({}, state, {popular: action.popularMovies.results});
-        case types.GET_LATEST_MOVIES_SUCCESS:
-            return Object.assign({}, state, {latest: action.latestMovies.results});
+        case types.GET_NOW_PLAYING_MOVIES_SUCCESS:
+            return Object.assign({}, state, {nowPlaying: action.nowPlayingMovies.results});
         case types.GET_TOP_MOVIES_SUCCESS:
             return Object.assign({}, state, {top: action.topMovies.results});
         case types.GET_UPCOMING_MOVIES_SUCCESS:

@@ -9,7 +9,7 @@ export const getMovies = async (type, movieId = null) => {
     let path;
 
     switch (type) {
-        case "latest": path = '/movie/latest'; break;
+        case "nowPlaying": path = '/movie/now_playing'; break;
         case "popular": path = '/movie/popular'; break;
         case "top": path = '/movie/top_rated'; break;
         case "upcoming": path = '/movie/upcoming'; break;

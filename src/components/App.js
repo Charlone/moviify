@@ -8,7 +8,7 @@ function App() {
   <BrowserRouter>
     <Nav />
       <Routes>
-        <Route exact path="/" element={<Home  />} />
+        <Route exact path="/" element={<Home />} />
         <Route path="/movies" />
         <Route path="/movie/:id" />
         <Route path="/series" />

@@ -3,10 +3,11 @@
 .card {
   border: 1px solid $base-secondary-color;
   box-shadow: 1px 1px 5px 0 $blend-color;
+  height: 460px;
 
   .card-body {
     .card-title {
-      font-size: medium;
+      font-size: small;
     }
 
     .rating {
@@ -18,11 +19,19 @@
     }
 
     .read-more {
+      position: absolute;
+      bottom: 15px;
       font-size: medium;
       background-color: $header-font-color;
       color: #FFFFFF;
       box-shadow: 4px 5px 10px 0 #000;
       border: 1px solid $blend-color;
     }
+  }
+}
+
+.splide {
+  .splide__pagination__page {
+    bottom: -10px;
   }
 }

@@ -1,6 +1,6 @@
 export async function handleResponse(response) {
-  if (response.ok) {
-    return response.json();
+  if (response.status === 200) {
+    return response.data;
   }
 
   if (response.status === 400) {

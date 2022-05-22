@@ -9,8 +9,9 @@ import Card from "../common/Card";
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/react-splide/css';
 import "../../styles/Home.scss";
+import initialState from "../../redux/reducers/initialState";
 
-const CategoryComponent = () => {
+const CategoryComponent = ({cards}) => {
     const sliderOptions = {
         rewind: true,
         gap: "1rem",
@@ -27,25 +28,25 @@ const CategoryComponent = () => {
         height: "auto"
     }
 
-    let tempLoopData = [];
+    let cardData = [];
 
-    for (let i = 0; i < 9; i++) {
-        tempLoopData.push(
-            <SplideSlide key={i}>
+    cards.forEach(card => {
+        cardData.push(
+            <SplideSlide key={card.id}>
                 <Card
-                    originalTitle={"Spider-Man: No Way Home"}
-                    posterPath={"https://m.media-amazon.com/images/M/MV5BZWMyYzFjYTYtNTRjYi00OGExLWE2YzgtOGRmYjAxZTU3NzBiXkEyXkFqcGdeQXVyMzQ0MzA0NTM@._V1_QL75_UX140_CR0,0,140,207_.jpg 140w, https://m.media-amazon.com/images/M/MV5BZWMyYzFjYTYtNTRjYi00OGExLWE2YzgtOGRmYjAxZTU3NzBiXkEyXkFqcGdeQXVyMzQ0MzA0NTM@._V1_QL75_UX210_CR0,0,210,311_.jpg 210w, https://m.media-amazon.com/images/M/MV5BZWMyYzFjYTYtNTRjYi00OGExLWE2YzgtOGRmYjAxZTU3NzBiXkEyXkFqcGdeQXVyMzQ0MzA0NTM@._V1_QL75_UX280_CR0,0,280,414_.jpg 280w"}
-                    voteAverage={"8.4"}
-                    overview={"With Spider-Man's identity now revealed, Peter asks Doctor Strange for help. When a spell goes wrong, dangerous foes from other worlds start to appear, forcing Peter to discover what it truly means to be Spider-Man."}
+                    originalTitle={card.original_title}
+                    posterPath={"https://image.tmdb.org/t/p/w300/" + card.poster_path}
+                    voteAverage={card.vote_average}
+                    overview={card.overview}
                 />
             </SplideSlide>
         );
-    }
+    })
 
     return (
         <>
             <Splide options={sliderOptions}>
-                {tempLoopData}
+                {cardData}
             </Splide>
         </>
     );
@@ -64,39 +65,41 @@ const Home = ({viewRequested, movies, loadMoviesData, ...props}) => {
                         hideProgressBar: false,
                         closeOnClick: true,
                     })
-                )
+                );
         }
     })
 
     const handleOnClick = (e) => {
         setActiveSlug(e.target.dataset.slug);
+        let categoryToCheck;
+
+        switch (activeSlug) {
+            case "popular": categoryToCheck = popular; break;
+            case "top": categoryToCheck = top; break;
+            case "upcoming": categoryToCheck = upcoming; break;
+            case "movie": categoryToCheck = movie; break;
+            case "images": categoryToCheck = images; break;
+            case "latest": categoryToCheck = latest; break;
+        }
+
+        if (categoryToCheck.length === 0) {
+            loadMoviesData(activeSlug)
+                .catch(error => toast.error("Could not load movies: " + error, {
+                        position: "top-right",
+                        autoClose: 10000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                    })
+                );
+        }
     }
 
     const Headers = () => {
-        const categoryArray = {
-            headers: [
-                {
-                    label: "popular",
-                    slug: "popular"
-                },
-                {
-                    label: "latest",
-                    slug: "latest"
-                },
-                {
-                    label: "top rated",
-                    slug: "top"
-                },
-                {
-                    label: "upcoming",
-                    slug: "upcoming"
-                }
-            ]
-        };
+        const categoryArray = initialState.headers;
 
         let headers = [];
 
-        categoryArray.headers.forEach(categoryTitle => {
+        categoryArray.forEach(categoryTitle => {
             headers.push(
                 <h4 key={categoryTitle.slug} className={"category-header"} onClick={handleOnClick}>
                     <strong data-slug={categoryTitle.slug}>
@@ -119,11 +122,17 @@ const Home = ({viewRequested, movies, loadMoviesData, ...props}) => {
                         </div>
                         <Switch />
                     </div>
-                    {activeSlug === 'popular' && <CategoryComponent />}
+                    {activeSlug === 'popular' && <CategoryComponent cards={popular} />}
                 </div>
             </section>
         </div>
     );
+}
+
+Home.propTypes = {
+    viewRequested: PropTypes.string.isRequired,
+    movies: PropTypes.object.isRequired,
+    loadMoviesData: PropTypes.func.isRequired
 }
 
 function mapStateToProps(state) {

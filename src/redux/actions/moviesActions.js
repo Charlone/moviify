@@ -5,15 +5,23 @@ import { beginApiCall, apiCallError } from "./apiStatusActions";
 export function loadPopularMoviesSuccess(popularMovies) {
     return { type: types.GET_POPULAR_MOVIES_SUCCESS, popularMovies }
 }
+
 export function loadNowPlayingMoviesSuccess(nowPlayingMovies) {
     return { type: types.GET_NOW_PLAYING_MOVIES_SUCCESS, nowPlayingMovies }
 }
+
 export function loadTopMoviesSuccess(topMovies) {
     return { type: types.GET_TOP_MOVIES_SUCCESS, topMovies }
 }
+
 export function loadUpcomingMoviesSuccess(upcomingMovies) {
     return { type: types.GET_UPCOMING_MOVIES_SUCCESS, upcomingMovies }
 }
+
+export function loadRecommendedMoviesSuccess(recommendedMovies) {
+    return { type: types.GET_RECOMMENDED_MOVIES_SUCCESS, recommendedMovies }
+}
+
 export function loadMovieSuccess(movie) {
     return { type: types.GET_MOVIE_SUCCESS, movie }
 }
@@ -33,6 +41,7 @@ export function loadMoviesData(type, movieId = null) {
                     case "popular": return dispatch(loadPopularMoviesSuccess(movieData));
                     case "top": dispatch(loadTopMoviesSuccess(movieData)); break;
                     case "upcoming": dispatch(loadUpcomingMoviesSuccess(movieData)); break;
+                    case "recommended": dispatch(loadRecommendedMoviesSuccess(movieData)); break;
                     case "movie": dispatch(loadMovieSuccess(movieData, movieId)); break;
                     case "images": dispatch(loadMovieImagesSuccess(movieData, movieId)); break;
                     default: return;

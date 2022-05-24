@@ -2,15 +2,16 @@ import { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { loadMoviesData } from "../../redux/actions/moviesActions";
 import { loadViewRequested } from "../../redux/actions/viewRequestedActions";
+import initialState from "../../redux/reducers/initialState";
 import PropTypes from "prop-types";
 import { toast } from 'react-toastify';
 import Switch from "../common/Switch";
 import Card from "../common/Card";
+import Spinner from "../common/Spinner";
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/react-splide/css';
+import 'animate.css';
 import "../../styles/Home.scss";
-import initialState from "../../redux/reducers/initialState";
-import Spinner from "../common/Spinner";
 
 const CategoryComponent = ({cards}) => {
     const sliderOptions = {
@@ -58,62 +59,11 @@ const Home = ({viewRequested, movies, loadMoviesData, loadViewRequested}) => {
     const [activeSlug, setActiveSlug] = useState('popular');
     const [isLoading, setIsLoading] = useState();
 
-    useEffect(() => {
-        if (popular.length === 0) {
-            setIsLoading(true);
-            loadMoviesData("popular")
-                .catch(error => toast.error("Could not load movies: " + error, {
-                        position: "top-right",
-                        autoClose: 10000,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                    })
-                );
-            setIsLoading(false);
-        }
-
-        if (nowPlaying.length === 0) {
-            setIsLoading(true);
-            loadMoviesData("nowPlaying")
-                .catch(error => toast.error("Could not load movies: " + error, {
-                        position: "top-right",
-                        autoClose: 10000,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                    })
-                );
-            setIsLoading(false);
-        }
-
-        if (top.length === 0) {
-            setIsLoading(true);
-            loadMoviesData("top")
-                .catch(error => toast.error("Could not load movies: " + error, {
-                        position: "top-right",
-                        autoClose: 10000,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                    })
-                );
-            setIsLoading(false);
-        }
-
-        if (upcoming.length === 0) {
-            setIsLoading(true);
-            loadMoviesData("upcoming")
-                .catch(error => toast.error("Could not load movies: " + error, {
-                        position: "top-right",
-                        autoClose: 10000,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                    })
-                );
-            setIsLoading(false);
-        }
-    }, [nowPlaying, popular, top, upcoming])
-
     const handleClick = (e) => {
         setActiveSlug(e.target.dataset.slug);
+    }
+
+    useEffect(() => {
         let categoryToCheck;
 
         switch (activeSlug) {
@@ -126,20 +76,22 @@ const Home = ({viewRequested, movies, loadMoviesData, loadViewRequested}) => {
         }
 
         if (categoryToCheck.length === 0) {
-            setIsLoading(true)
-            loadMoviesData(activeSlug)
-                .then(() => {
-                    setIsLoading(false);
-                })
-                .catch(error => toast.error("Could not load movies: " + error, {
-                        position: "top-right",
-                        autoClose: 10000,
-                        hideProgressBar: false,
-                        closeOnClick: true,
+            setIsLoading(true);
+            setTimeout(() => {
+                loadMoviesData(activeSlug)
+                    .then(() => {
+                        setIsLoading(false);
                     })
-                );
+                    .catch(error => toast.error("Could not load movies: " + error, {
+                            position: "top-right",
+                            autoClose: 10000,
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                        })
+                    );
+            }, 1000);
         }
-    }
+    }, [popular, top, upcoming, nowPlaying, isLoading, activeSlug])
 
     const Headers = () => {
         const categoryArray = initialState.headers;
@@ -168,10 +120,10 @@ const Home = ({viewRequested, movies, loadMoviesData, loadViewRequested}) => {
                         </div>
                         <Switch />
                     </div>
-                    {activeSlug === 'popular' && popular.length === 0 ? <Spinner /> : (activeSlug === 'popular' && <CategoryComponent cards={popular} />)}
-                    {activeSlug === 'nowPlaying' && nowPlaying.length === 0 ? <Spinner /> : (activeSlug === 'nowPlaying' && <CategoryComponent cards={nowPlaying} />)}
-                    {activeSlug === 'top' && top.length === 0 ? <Spinner /> : (activeSlug === 'top' && <CategoryComponent cards={top} />)}
-                    {activeSlug === 'upcoming' && upcoming.length === 0 ? <Spinner /> : (activeSlug === 'upcoming' && <CategoryComponent cards={upcoming} />)}
+                    {activeSlug === 'popular' && popular.length === 0 ? <Spinner /> : (activeSlug === 'popular' && <div className={"animate__animated animate__backInUp"}><CategoryComponent cards={popular} /></div>)}
+                    {activeSlug === 'nowPlaying' && nowPlaying.length === 0 ? <Spinner /> : (activeSlug === 'nowPlaying' && <div className={"animate__animated animate__backInUp"}><CategoryComponent cards={nowPlaying} /></div>)}
+                    {activeSlug === 'top' && top.length === 0 ? <Spinner /> : (activeSlug === 'top' && <div className={"animate__animated animate__backInUp"}><CategoryComponent cards={top} /></div>)}
+                    {activeSlug === 'upcoming' && upcoming.length === 0 ? <Spinner /> : (activeSlug === 'upcoming' && <div className={"animate__animated animate__backInUp"}><CategoryComponent cards={upcoming} /></div>)}
                 </div>
             </section>
         </div>

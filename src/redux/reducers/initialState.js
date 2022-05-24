@@ -10,24 +10,54 @@ const initialState = {
         movie: [],
         images: []
     },
-    headers: [
-        {
-            label: "popular",
-            slug: "popular"
-        },
-        {
-            label: "now playing",
-            slug: "nowPlaying"
-        },
-        {
-            label: "top rated",
-            slug: "top"
-        },
-        {
-            label: "upcoming",
-            slug: "upcoming"
-        }
-    ]
+    series: {
+        popular: [],
+        top: [],
+        onTheAir: [],
+        airingToday: [],
+        recommended: [],
+        similar: [],
+        serie: [],
+        images: []
+    },
+    headers: {
+        movies: [
+            {
+                label: "popular",
+                slug: "popular"
+            },
+            {
+                label: "now playing",
+                slug: "nowPlaying"
+            },
+            {
+                label: "top rated",
+                slug: "top"
+            },
+            {
+                label: "upcoming",
+                slug: "upcoming"
+            }
+        ],
+        series: [
+            {
+                label: "popular",
+                slug: "popular"
+            },
+            {
+                label: "on the air",
+                slug: "onTheAir"
+            },
+            {
+                label: "top rated",
+                slug: "top"
+            },
+            {
+                label: "airing today",
+                slug: "airingToday"
+            },
+        ]
+    }
 };
 
 export default initialState;

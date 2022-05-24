@@ -6,62 +6,15 @@ import initialState from "../../redux/reducers/initialState";
 import PropTypes from "prop-types";
 import { toast } from 'react-toastify';
 import Switch from "../common/Switch";
-import Card from "../common/Card";
 import Spinner from "../common/Spinner";
-import { Splide, SplideSlide } from '@splidejs/react-splide';
-import '@splidejs/react-splide/css';
+import MovieCategorySection from "../common/MovieCategorySection";
 import 'animate.css';
 import "../../styles/Home.scss";
-
-const CategoryComponent = ({cards}) => {
-    const sliderOptions = {
-        rewind: true,
-        gap: "1rem",
-        type: 'slider',
-        arrows: 'slider',
-        autoplay: false,
-        start: 0,
-        drag: true,
-        pagination: true,
-        perPage: 6,
-        perMove: 1,
-        updateOnMove: true,
-        width: "100%",
-        height: "auto"
-    }
-
-    let cardData = [];
-
-    cards.forEach(card => {
-        cardData.push(
-            <SplideSlide key={card.id}>
-                <Card
-                    originalTitle={card.original_title}
-                    posterPath={"https://image.tmdb.org/t/p/w300/" + card.poster_path}
-                    voteAverage={card.vote_average}
-                    overview={card.overview}
-                />
-            </SplideSlide>
-        );
-    })
-
-    return (
-        <>
-            <Splide options={sliderOptions}>
-                {cardData}
-            </Splide>
-        </>
-    );
-}
 
 const Home = ({viewRequested, movies, loadMoviesData, loadViewRequested}) => {
     const { nowPlaying, popular, top, upcoming, movie, images } = movies;
     const [activeSlug, setActiveSlug] = useState('popular');
     const [isLoading, setIsLoading] = useState();
-
-    const handleClick = (e) => {
-        setActiveSlug(e.target.dataset.slug);
-    }
 
     useEffect(() => {
         let categoryToCheck;
@@ -91,10 +44,15 @@ const Home = ({viewRequested, movies, loadMoviesData, loadViewRequested}) => {
                     );
             }, 1000);
         }
-    }, [popular, top, upcoming, nowPlaying, isLoading, activeSlug])
+    }, [popular, top, upcoming, nowPlaying, isLoading, activeSlug]);
+
+    const handleClick = (e) => {
+        setActiveSlug(e.target.dataset.slug);
+    }
 
     const Headers = () => {
-        const categoryArray = initialState.headers;
+        let categoryArray;
+        viewRequested === 'movies' ? categoryArray = initialState.headers.movies: categoryArray = initialState.headers.series;
         let headers = [];
 
         categoryArray.forEach(categoryTitle => {
@@ -120,10 +78,10 @@ const Home = ({viewRequested, movies, loadMoviesData, loadViewRequested}) => {
                         </div>
                         <Switch />
                     </div>
-                    {activeSlug === 'popular' && popular.length === 0 ? <Spinner /> : (activeSlug === 'popular' && <div className={"animate__animated animate__backInUp"}><CategoryComponent cards={popular} /></div>)}
-                    {activeSlug === 'nowPlaying' && nowPlaying.length === 0 ? <Spinner /> : (activeSlug === 'nowPlaying' && <div className={"animate__animated animate__backInUp"}><CategoryComponent cards={nowPlaying} /></div>)}
-                    {activeSlug === 'top' && top.length === 0 ? <Spinner /> : (activeSlug === 'top' && <div className={"animate__animated animate__backInUp"}><CategoryComponent cards={top} /></div>)}
-                    {activeSlug === 'upcoming' && upcoming.length === 0 ? <Spinner /> : (activeSlug === 'upcoming' && <div className={"animate__animated animate__backInUp"}><CategoryComponent cards={upcoming} /></div>)}
+                    {activeSlug === 'popular' && popular.length === 0 ? <Spinner /> : (activeSlug === 'popular' && <div className={"animate__animated animate__backInUp"}><MovieCategorySection cards={popular} /></div>)}
+                    {activeSlug === 'nowPlaying' && nowPlaying.length === 0 ? <Spinner /> : (activeSlug === 'nowPlaying' && <div className={"animate__animated animate__backInUp"}><MovieCategorySection cards={nowPlaying} /></div>)}
+                    {activeSlug === 'top' && top.length === 0 ? <Spinner /> : (activeSlug === 'top' && <div className={"animate__animated animate__backInUp"}><MovieCategorySection cards={top} /></div>)}
+                    {activeSlug === 'upcoming' && upcoming.length === 0 ? <Spinner /> : (activeSlug === 'upcoming' && <div className={"animate__animated animate__backInUp"}><MovieCategorySection cards={upcoming} /></div>)}
                 </div>
             </section>
         </div>
@@ -133,7 +91,12 @@ const Home = ({viewRequested, movies, loadMoviesData, loadViewRequested}) => {
 Home.propTypes = {
     viewRequested: PropTypes.string.isRequired,
     movies: PropTypes.object.isRequired,
-    loadMoviesData: PropTypes.func.isRequired
+    loadMoviesData: PropTypes.func.isRequired,
+    popular: PropTypes.array.isRequired,
+    latest: PropTypes.array.isRequired,
+    nowPlaying: PropTypes.array.isRequired,
+    top: PropTypes.array.isRequired,
+    upcoming: PropTypes.array.isRequired,
 }
 
 function mapStateToProps(state) {

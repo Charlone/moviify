@@ -58,62 +58,11 @@ const Home = ({viewRequested, movies, loadMoviesData, loadViewRequested}) => {
     const [activeSlug, setActiveSlug] = useState('popular');
     const [isLoading, setIsLoading] = useState();
 
-    useEffect(() => {
-        if (popular.length === 0) {
-            setIsLoading(true);
-            loadMoviesData("popular")
-                .catch(error => toast.error("Could not load movies: " + error, {
-                        position: "top-right",
-                        autoClose: 10000,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                    })
-                );
-            setIsLoading(false);
-        }
-
-        if (nowPlaying.length === 0) {
-            setIsLoading(true);
-            loadMoviesData("nowPlaying")
-                .catch(error => toast.error("Could not load movies: " + error, {
-                        position: "top-right",
-                        autoClose: 10000,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                    })
-                );
-            setIsLoading(false);
-        }
-
-        if (top.length === 0) {
-            setIsLoading(true);
-            loadMoviesData("top")
-                .catch(error => toast.error("Could not load movies: " + error, {
-                        position: "top-right",
-                        autoClose: 10000,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                    })
-                );
-            setIsLoading(false);
-        }
-
-        if (upcoming.length === 0) {
-            setIsLoading(true);
-            loadMoviesData("upcoming")
-                .catch(error => toast.error("Could not load movies: " + error, {
-                        position: "top-right",
-                        autoClose: 10000,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                    })
-                );
-            setIsLoading(false);
-        }
-    }, [nowPlaying, popular, top, upcoming])
-
     const handleClick = (e) => {
         setActiveSlug(e.target.dataset.slug);
+    }
+
+    useEffect(() => {
         let categoryToCheck;
 
         switch (activeSlug) {
@@ -126,20 +75,22 @@ const Home = ({viewRequested, movies, loadMoviesData, loadViewRequested}) => {
         }
 
         if (categoryToCheck.length === 0) {
-            setIsLoading(true)
-            loadMoviesData(activeSlug)
-                .then(() => {
-                    setIsLoading(false);
-                })
-                .catch(error => toast.error("Could not load movies: " + error, {
-                        position: "top-right",
-                        autoClose: 10000,
-                        hideProgressBar: false,
-                        closeOnClick: true,
+            setIsLoading(true);
+            setTimeout(() => {
+                loadMoviesData(activeSlug)
+                    .then(() => {
+                        setIsLoading(false);
                     })
-                );
+                    .catch(error => toast.error("Could not load movies: " + error, {
+                            position: "top-right",
+                            autoClose: 10000,
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                        })
+                    );
+            }, 1000);
         }
-    }
+    }, [popular, top, upcoming, nowPlaying, isLoading, activeSlug])
 
     const Headers = () => {
         const categoryArray = initialState.headers;

@@ -6,6 +6,7 @@ const initialState = {
         popular: [],
         top: [],
         upcoming: [],
+        recommended: [],
         movie: [],
         images: []
     },

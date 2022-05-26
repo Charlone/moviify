@@ -1,4 +1,5 @@
 const initialState = {
+    activeSlug: 'popular',
     viewRequested: 'movies',
     apiCallsInProgress: 0,
     movies: {
@@ -23,39 +24,83 @@ const initialState = {
     headers: {
         movies: [
             {
-                label: "popular",
-                slug: "popular"
+                label: "Popular",
+                slug: "popular",
+                icon: "star.svg"
             },
             {
-                label: "now playing",
-                slug: "nowPlaying"
+                label: "Top Rated",
+                slug: "top",
+                icon: "trophy.svg"
             },
             {
-                label: "top rated",
-                slug: "top"
+                label: "Now Playing",
+                slug: "nowPlaying",
+                icon: "play.svg"
             },
             {
-                label: "upcoming",
-                slug: "upcoming"
+                label: "Upcoming",
+                slug: "upcoming",
+                icon: "movie.svg"
+            },
+            {
+                label: "Actors",
+                slug: "actors",
+                icon: "actors.svg",
+                href: "/actors"
+            },
+            {
+                label: "Movies",
+                slug: "movies",
+                icon: "movie.svg",
+                href: "/"
+            },
+            {
+                label: "Series",
+                slug: "series",
+                icon: "monitor.svg",
+                href: "/"
             }
         ],
         series: [
             {
-                label: "popular",
-                slug: "popular"
+                label: "Popular",
+                slug: "popular",
+                icon: "star.svg"
             },
             {
-                label: "on the air",
-                slug: "onTheAir"
+                label: "Top Rated",
+                slug: "top",
+                icon: "trophy.svg"
             },
             {
-                label: "top rated",
-                slug: "top"
+                label: "On The Air",
+                slug: "onTheAir",
+                icon: "film.svg"
             },
             {
-                label: "airing today",
-                slug: "airingToday"
+                label: "Airing Today",
+                slug: "airingToday",
+                icon: "monitor.svg"
             },
+            {
+                label: "Actors",
+                slug: "actors",
+                icon: "actors.svg",
+                href: "/actors"
+            },
+            {
+                label: "Movies",
+                slug: "movies",
+                icon: "movie.svg",
+                href: "/"
+            },
+            {
+                label: "Series",
+                slug: "series",
+                icon: "monitor.svg",
+                href: "/"
+            }
         ]
     }
 };

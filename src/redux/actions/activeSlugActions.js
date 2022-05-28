@@ -1,15 +1,15 @@
 import * as types from "./actionTypes";
 import { beginApiCall, apiCallError } from "./apiStatusActions";
 
-export function viewRequestedSuccess(viewRequested) {
-    return { type: types.VIEW_REQUESTED_SUCCESS, viewRequested}
+export function activeSlugSuccess(activeSlug) {
+    return { type: types.GET_ACTIVE_SLUG_SUCCESS, activeSlug}
 }
 
-export function loadViewRequested(viewRequested) {
+export function loadActiveSlug(activeSlug) {
     return function (dispatch) {
         dispatch(beginApiCall());
         try {
-            dispatch(viewRequestedSuccess(viewRequested));
+            return dispatch(activeSlugSuccess(activeSlug));
         } catch (error) {
             dispatch(apiCallError(error));
             throw error;

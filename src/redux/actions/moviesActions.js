@@ -42,13 +42,13 @@ export function loadMoviesData(type, movieId = null) {
             .then((movieData) => {
                 switch (type) {
                     case "nowPlaying": dispatch(loadNowPlayingMoviesSuccess(movieData)); break;
-                    case "popular": return dispatch(loadPopularMoviesSuccess(movieData));
-                    case "top": dispatch(loadTopMoviesSuccess(movieData)); break;
+                    case "popularMovies": return dispatch(loadPopularMoviesSuccess(movieData));
+                    case "topMovies": dispatch(loadTopMoviesSuccess(movieData)); break;
                     case "upcoming": dispatch(loadUpcomingMoviesSuccess(movieData)); break;
                     case "genre": dispatch(loadMoviesGenreSuccess(movieData)); break;
                     case "recommended": dispatch(loadRecommendedMoviesSuccess(movieData, movieId)); break;
                     case "movie": dispatch(loadMovieSuccess(movieData, movieId)); break;
-                    case "images": dispatch(loadMovieImagesSuccess(movieData, movieId)); break;
+                    case "movieImages": dispatch(loadMovieImagesSuccess(movieData, movieId)); break;
                     default: return;
                 }
             })

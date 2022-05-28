@@ -42,13 +42,13 @@ export function loadSeriesData(type, serieId = null) {
             .then((serieData) => {
                 switch (type) {
                     case "airingToday": dispatch(loadAiringTodaySeriesSuccess(serieData)); break;
-                    case "popular": return dispatch(loadPopularSeriesSuccess(serieData));
-                    case "top": dispatch(loadTopSeriesSuccess(serieData)); break;
+                    case "popularSeries": return dispatch(loadPopularSeriesSuccess(serieData));
+                    case "topSeries": dispatch(loadTopSeriesSuccess(serieData)); break;
                     case "onTheAir": dispatch(loadOnTheAirSeriesSuccess(serieData)); break;
                     case "recommended": dispatch(loadRecommendedSeriesSuccess(serieData)); break;
                     case "similar": dispatch(loadSimilarSeriesSuccess(serieData)); break;
-                    case "movie": dispatch(loadSerieSuccess(serieData, serieId)); break;
-                    case "images": dispatch(loadSerieImagesSuccess(serieData, serieId)); break;
+                    case "serie": dispatch(loadSerieSuccess(serieData, serieId)); break;
+                    case "serieImages": dispatch(loadSerieImagesSuccess(serieData, serieId)); break;
                     default: return;
                 }
             })

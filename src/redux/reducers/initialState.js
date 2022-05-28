@@ -1,36 +1,36 @@
 const initialState = {
-    activeSlug: 'popular',
+    activeSlug: 'popularMovies',
     viewRequested: 'movies',
     apiCallsInProgress: 0,
     movies: {
         nowPlaying: [],
-        popular: [],
-        top: [],
+        popularMovies: [],
+        topMovies: [],
         upcoming: [],
         recommended: [],
         movie: [],
-        images: []
+        movieImages: []
     },
     series: {
-        popular: [],
-        top: [],
+        popularSeries: [],
+        topSeries: [],
         onTheAir: [],
         airingToday: [],
         recommended: [],
         similar: [],
         serie: [],
-        images: []
+        serieImages: []
     },
     headers: {
         movies: [
             {
                 label: "Popular",
-                slug: "popular",
+                slug: "popularMovies",
                 icon: "star.svg"
             },
             {
                 label: "Top Rated",
-                slug: "top",
+                slug: "topMovies",
                 icon: "trophy.svg"
             },
             {
@@ -65,12 +65,12 @@ const initialState = {
         series: [
             {
                 label: "Popular",
-                slug: "popular",
+                slug: "popularSeries",
                 icon: "star.svg"
             },
             {
                 label: "Top Rated",
-                slug: "top",
+                slug: "topSeries",
                 icon: "trophy.svg"
             },
             {

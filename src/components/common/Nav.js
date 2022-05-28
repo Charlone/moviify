@@ -7,48 +7,86 @@ import PropTypes from "prop-types";
 import { toast } from "react-toastify";
 import { loadMoviesData } from "../../redux/actions/moviesActions";
 import { loadViewRequested } from "../../redux/actions/viewRequestedActions";
+import { loadSeriesData} from "../../redux/actions/seriesActions";
 
-const Nav = ({activeSlug, viewRequested, movies, loadMoviesData, loadViewRequested, loadActiveSlug}) => {
-    const { nowPlaying, popular, top, upcoming, movie, images } = movies;
+const Nav = ({activeSlug, movies, loadMoviesData, viewRequested, loadViewRequested, series, loadSeriesData, loadActiveSlug}) => {
+    const { nowPlaying, popularMovies, topMovies, upcoming, movie, movieImages } = movies;
+    const { popularSeries, topSeries, onTheAir, airingToday, serie, serieImages } = series;
     const [isLoading, setIsLoading] = useState();
 
     useEffect(() => {
         let categoryToCheck;
 
-        switch (activeSlug) {
-            case "popular": categoryToCheck = popular; break;
-            case "top": categoryToCheck = top; break;
-            case "upcoming": categoryToCheck = upcoming; break;
-            case "movie": categoryToCheck = movie; break;
-            case "images": categoryToCheck = images; break;
-            case "nowPlaying": categoryToCheck = nowPlaying; break;
-        }
+        if (viewRequested === 'movies') {
+            switch (activeSlug) {
+                case "popularMovies": categoryToCheck = popularMovies; break;
+                case "topMovies": categoryToCheck = topMovies; break;
+                case "upcoming": categoryToCheck = upcoming; break;
+                case "movie": categoryToCheck = movie; break;
+                case "movieImages": categoryToCheck = movieImages; break;
+                case "nowPlaying": categoryToCheck = nowPlaying; break;
+                default: return;
+            }
 
-        if (categoryToCheck.length === 0) {
-            setIsLoading(true);
-            setTimeout(() => {
-                loadMoviesData(activeSlug)
-                    .then(() => {
-                        setIsLoading(false);
-                    })
-                    .catch(error => toast.error("Could not load movies: " + error, {
-                            position: "top-right",
-                            autoClose: 10000,
-                            hideProgressBar: false,
-                            closeOnClick: true,
+            if (categoryToCheck.length === 0) {
+                setIsLoading(true);
+                setTimeout(() => {
+                    loadMoviesData(activeSlug)
+                        .then(() => {
+                            setIsLoading(false);
                         })
-                    );
-            }, 1000);
+                        .catch(error => toast.error("Could not load movies: " + error, {
+                                position: "top-right",
+                                autoClose: 10000,
+                                hideProgressBar: false,
+                                closeOnClick: true,
+                            })
+                        );
+                }, 1000);
+            }
+        } else {
+            switch (activeSlug) {
+                case "popularSeries": categoryToCheck = popularSeries; break;
+                case "topSeries": categoryToCheck = topSeries; break;
+                case "onTheAir": categoryToCheck = onTheAir; break;
+                case "airingToday": categoryToCheck = airingToday; break;
+                case "serieImages": categoryToCheck = serieImages; break;
+                case "serie": categoryToCheck = serie; break;
+                default: return;
+            }
+
+            if (categoryToCheck.length === 0) {
+                setIsLoading(true);
+                setTimeout(() => {
+                    loadSeriesData(activeSlug)
+                        .then(() => {
+                            setIsLoading(false);
+                        })
+                        .catch(error => toast.error("Could not load movies: " + error, {
+                                position: "top-right",
+                                autoClose: 10000,
+                                hideProgressBar: false,
+                                closeOnClick: true,
+                            })
+                        );
+                }, 1000);
+            }
         }
-    }, [popular, top, upcoming, nowPlaying, isLoading, activeSlug]);
+    }, [popularMovies, topMovies, upcoming, nowPlaying, viewRequested, popularSeries, topSeries, airingToday, onTheAir, isLoading, activeSlug]);
 
     const handleClick = (e) => {
         e.preventDefault();
+        const view = e.target.dataset.slug;
 
         switch (e.target.dataset.slug) {
             case 'actors': break;
             case 'movies':
-            case 'series': loadViewRequested(e.target.dataset.slug); break;
+            case 'series':
+                loadViewRequested(e.target.dataset.slug);
+                view === 'series'
+                    ? loadActiveSlug('popularSeries')
+                    : loadActiveSlug('popularMovies');
+            break;
             default: loadActiveSlug(e.target.dataset.slug); break;
         }
     }
@@ -137,6 +175,7 @@ Nav.propTypes = {
     activeSlug: PropTypes.string.isRequired,
     viewRequested: PropTypes.string.isRequired,
     movies: PropTypes.object.isRequired,
+    series: PropTypes.object.isRequired,
     loadMoviesData: PropTypes.func.isRequired,
 }
 
@@ -145,6 +184,7 @@ function mapStateToProps(state) {
         activeSlug: state.activeSlug,
         viewRequested: state.viewRequested,
         movies: state.movies,
+        series: state.series,
     }
 }
 
@@ -152,6 +192,7 @@ const mapDispatchToProps = {
     loadActiveSlug,
     loadMoviesData,
     loadViewRequested,
+    loadSeriesData,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Nav);

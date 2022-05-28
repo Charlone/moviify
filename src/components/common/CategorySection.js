@@ -2,7 +2,7 @@ import Card from "./Card";
 import {Splide, SplideSlide} from "@splidejs/react-splide";
 import '@splidejs/react-splide/css';
 
-const MovieCategorySection = ({cards}) => {
+const CategorySection = ({cards}) => {
     const sliderOptions = {
         rewind: true,
         gap: "1rem",
@@ -21,11 +21,13 @@ const MovieCategorySection = ({cards}) => {
 
     let cardData = [];
 
-    cards.forEach(card => {
+    const cleanCards = cards.filter(card => card.overview !== '');
+
+    cleanCards.forEach(card => {
         cardData.push(
             <SplideSlide key={card.id}>
                 <Card
-                    originalTitle={card.original_title}
+                    originalTitle={card.title ? card.title : card.name}
                     posterPath={"https://image.tmdb.org/t/p/w300/" + card.poster_path}
                     voteAverage={card.vote_average}
                     overview={card.overview}
@@ -43,4 +45,4 @@ const MovieCategorySection = ({cards}) => {
     );
 }
 
-export default MovieCategorySection;
+export default CategorySection;

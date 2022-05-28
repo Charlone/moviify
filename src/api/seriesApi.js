@@ -10,13 +10,13 @@ export const getSeries = async (type, serieId = null) => {
 
     switch (type) {
         case "onTheAir": path = '/tv/on_the_air'; break;
-        case "popular": path = '/tv/popular'; break;
-        case "top": path = '/tv/top_rated'; break;
+        case "popularSeries": path = '/tv/popular'; break;
+        case "topSeries": path = '/tv/top_rated'; break;
         case "airingToday": path = '/tv/airing_today'; break;
         case "recommended": path = `/tv/${serieId}/recommendations`; break;
         case "similar": path = `/tv/${serieId}/similar`; break;
         case "serie": path = `/tv/${serieId}`; break;
-        case "images": path = `/tv/${serieId}/images`; break;
+        case "serieImages": path = `/tv/${serieId}/images`; break;
         default: return handleError("No registered endpoint for specified type - " + type);
     }
 

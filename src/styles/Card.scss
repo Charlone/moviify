@@ -4,9 +4,10 @@
   border: 1px solid $base-secondary-color;
   box-shadow: 1px 1px 5px 0 $blend-color;
 
-  //.card-img-top {
-  //  min-height: 255px;
-  //}
+  .card-img-top {
+    border-bottom: 1px solid $base-secondary-color;
+    box-shadow: 1px 1px 5px 0 $blend-color;
+  }
 
   .card-body {
     .card-title {

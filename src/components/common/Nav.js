@@ -72,7 +72,7 @@ const Nav = ({activeSlug, movies, loadMoviesData, viewRequested, loadViewRequest
                 }, 1000);
             }
         }
-    }, [popularMovies, topMovies, upcoming, nowPlaying, viewRequested, popularSeries, topSeries, airingToday, onTheAir, isLoading, activeSlug]);
+    }, [activeSlug]);
 
     const handleClick = (e) => {
         e.preventDefault();
@@ -80,6 +80,7 @@ const Nav = ({activeSlug, movies, loadMoviesData, viewRequested, loadViewRequest
 
         switch (e.target.dataset.slug) {
             case 'actors': break;
+            case 'home': loadViewRequested(viewRequested); break;
             case 'movies':
             case 'series':
                 loadViewRequested(e.target.dataset.slug);
@@ -106,13 +107,16 @@ const Nav = ({activeSlug, movies, loadMoviesData, viewRequested, loadViewRequest
         }
 
         cleanArray.forEach(categoryTitle => {
+            const activeTabStyle = { borderBottom: categoryTitle.slug === activeSlug ? "3px solid #E71" : null};
+            const activePageStyle = { borderBottom: `/${categoryTitle.slug}` === location.pathname ? "3px solid #E71" : null};
+
             if (categoryTitle.hasOwnProperty('href')) {
                 headers.push(
-                    <li className={"nav-item"} key={key++} className={"animate__animated animate__fadeIn"} onClick={handleClick}>
+                    <li key={key++} className={"nav-item animate__animated animate__fadeIn"} onClick={handleClick}>
                         <NavLink to={categoryTitle.href} className={"nav-link"} aria-current={"page"}>
-                            <div className={"menu-item-container"}>
-                                <img className={"nav-icon"} src={categoryTitle.icon} alt={categoryTitle.slug} />
-                                <h6 data-slug={categoryTitle.slug}>
+                            <div className={"menu-item-container"} data-slug={categoryTitle.slug}>
+                                <img className={"nav-icon"} src={categoryTitle.icon} alt={categoryTitle.slug} data-slug={categoryTitle.slug} />
+                                <h6 data-slug={categoryTitle.slug} style={activePageStyle}>
                                     {categoryTitle.label}
                                 </h6>
                             </div>
@@ -121,12 +125,11 @@ const Nav = ({activeSlug, movies, loadMoviesData, viewRequested, loadViewRequest
                 );
             } else {
                 headers.push(
-                    <li className={`nav-item`} key={key++} onClick={handleClick}
-                        className={"animate__animated animate__fadeIn"}>
-                        <div className={"nav-link"} aria-current={"page"}>
-                            <div className={"menu-item-container"}>
-                                <img className={"nav-icon"} src={categoryTitle.icon} alt={categoryTitle.slug}/>
-                                <h6 data-slug={categoryTitle.slug}>
+                    <li key={key++} onClick={handleClick} className={"nav-item animate__animated animate__fadeIn"}>
+                        <div className={"nav-link"} aria-current={"page"} data-slug={categoryTitle.slug}>
+                            <div className={"menu-item-container"} data-slug={categoryTitle.slug}>
+                                <img className={"nav-icon"} src={categoryTitle.icon} alt={categoryTitle.slug} data-slug={categoryTitle.slug}/>
+                                <h6 data-slug={categoryTitle.slug} style={activeTabStyle}>
                                     {categoryTitle.label}
                                 </h6>
                             </div>
@@ -142,10 +145,12 @@ const Nav = ({activeSlug, movies, loadMoviesData, viewRequested, loadViewRequest
     return (
         <div className={"App-header"}>
             <nav className={"navbar navbar-expand-lg navbar-light"}>
-                <NavLink to={"/"} className={"navbar-brand"}>
-                    <span className={"logo-main-text"}>Moviify</span>
-                    <span className={"logo-sub-text"}>Movies & Series</span>
-                </NavLink>
+                <div className={"navbar-brand-container"} onClick={handleClick}>
+                    <NavLink to={"/"} className={"navbar-brand"}>
+                        <span className={"logo-main-text"} data-slug={"home"}>Moviify</span>
+                        <span className={"logo-sub-text"} data-slug={"home"}>Movies & Series</span>
+                    </NavLink>
+                </div>
                 <button className={"navbar-toggler"} type={"button"} data-bs-toggle={"collapse"}
                         data-bs-target={"#navbarSupportedContent"} aria-controls={"navbarSupportedContent"}
                         aria-expanded={"false"} aria-label={"Toggle navigation"}>

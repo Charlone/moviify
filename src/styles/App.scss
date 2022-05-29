@@ -54,6 +54,7 @@ body {
 
     .nav-link {
       color: $font-color;
+      cursor: pointer;
 
       .menu-item-container {
         display: flex;

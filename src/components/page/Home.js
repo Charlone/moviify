@@ -20,9 +20,6 @@ const Home = ({activeSlug, viewRequested, movies, series, loadMoviesData, loadVi
             <section className={"section text-white  m-0 p-0"}>
                 <div className={"main-container mt-2 mb-2"}>
                     <div className={"category-header-container"}>
-                        <div className={"category-header-nav"}>
-                            {/*<Headers />*/}
-                        </div>
                         <Switch />
                     </div>
                     {activeSlug === 'popularMovies' && popularMovies.length === 0 ? <Spinner /> : (activeSlug === 'popularMovies' && <div className={"animate__animated animate__backInUp"}><CategorySection cards={popularMovies} /></div>)}

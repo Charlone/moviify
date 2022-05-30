@@ -98,7 +98,13 @@ const Nav = ({activeSlug, movies, loadMoviesData, viewRequested, loadViewRequest
         }
 
         cleanArray.forEach(categoryTitle => {
-            const activeTabStyle = { borderBottom: categoryTitle.slug === activeSlug ? "3px solid #E71" : (`/${categoryTitle.slug}` === location.pathname ? "3px solid #E71" : null)};
+            let activeTabStyle;
+
+            if (window.innerWidth > 991) {
+                activeTabStyle = {borderBottom: categoryTitle.slug === activeSlug ? "3px solid #E71" : (`/${categoryTitle.slug}` === location.pathname ? "3px solid #E71" : null)};
+            } else {
+                activeTabStyle = {borderLeft: categoryTitle.slug === activeSlug ? "3px solid #E71" : (`/${categoryTitle.slug}` === location.pathname ? "3px solid #E71" : null), paddingLeft: "0.2rem"};
+            }
 
             if (categoryTitle.hasOwnProperty('href')) {
                 headers.push(

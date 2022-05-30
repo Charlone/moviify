@@ -1,5 +1,5 @@
-import {useEffect, useState} from "react";
-import {NavLink, useLocation} from "react-router-dom";
+import { useEffect } from "react";
+import { NavLink, useLocation } from "react-router-dom";
 import initialState from "../../redux/reducers/initialState";
 import { connect } from "react-redux";
 import { loadActiveSlug } from "../../redux/actions/activeSlugActions";
@@ -12,7 +12,6 @@ import { loadSeriesData} from "../../redux/actions/seriesActions";
 const Nav = ({activeSlug, movies, loadMoviesData, viewRequested, loadViewRequested, series, loadSeriesData, loadActiveSlug}) => {
     const { nowPlaying, popularMovies, topMovies, upcoming, movie, movieImages } = movies;
     const { popularSeries, topSeries, onTheAir, airingToday, serie, serieImages } = series;
-    const [isLoading, setIsLoading] = useState();
 
     useEffect(() => {
         let categoryToCheck;
@@ -29,12 +28,8 @@ const Nav = ({activeSlug, movies, loadMoviesData, viewRequested, loadViewRequest
             }
 
             if (categoryToCheck.length === 0) {
-                setIsLoading(true);
                 setTimeout(() => {
                     loadMoviesData(activeSlug)
-                        .then(() => {
-                            setIsLoading(false);
-                        })
                         .catch(error => toast.error("Could not load movies: " + error, {
                                 position: "top-right",
                                 autoClose: 10000,
@@ -56,12 +51,8 @@ const Nav = ({activeSlug, movies, loadMoviesData, viewRequested, loadViewRequest
             }
 
             if (categoryToCheck.length === 0) {
-                setIsLoading(true);
                 setTimeout(() => {
                     loadSeriesData(activeSlug)
-                        .then(() => {
-                            setIsLoading(false);
-                        })
                         .catch(error => toast.error("Could not load movies: " + error, {
                                 position: "top-right",
                                 autoClose: 10000,
@@ -72,7 +63,7 @@ const Nav = ({activeSlug, movies, loadMoviesData, viewRequested, loadViewRequest
                 }, 1000);
             }
         }
-    }, [activeSlug]);
+    }, [activeSlug, airingToday, loadMoviesData, loadSeriesData, movie, movieImages, nowPlaying, onTheAir, popularMovies, popularSeries, serie, serieImages, topMovies, topSeries, upcoming, viewRequested]);
 
     const handleClick = (e) => {
         e.preventDefault();

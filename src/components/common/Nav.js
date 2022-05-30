@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 import { loadMoviesData } from "../../redux/actions/moviesActions";
 import { loadViewRequested } from "../../redux/actions/viewRequestedActions";
 import { loadSeriesData} from "../../redux/actions/seriesActions";
+import SelectInput from "./SelectInput";
 
 const Nav = ({activeSlug, movies, loadMoviesData, viewRequested, loadViewRequested, series, loadSeriesData, loadActiveSlug}) => {
     const { nowPlaying, popularMovies, topMovies, upcoming, movie, movieImages } = movies;
@@ -156,8 +157,10 @@ const Nav = ({activeSlug, movies, loadMoviesData, viewRequested, loadViewRequest
                     <ul className={"navbar-nav me-auto mb-2 mb-lg-0"}>
                         <Headers />
                     </ul>
+
                     <form className="d-flex search-container">
-                        <input className="form-control me-2 search-input" type="search" placeholder="Search" aria-label="Search" />
+                        <SelectInput name={"search-category"} />
+                        <input className="form-control search-input" type="search" placeholder="Search" aria-label="Search" />
                         <button className={"btn search-button"} type="submit">
                             <svg fill="#E71" width={"25px"} height={"25px"} version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 53.627 53.627" style={{enableBackground:"new 0 0 53.627 53.627"}}>
                                 <path d="M53.627,49.385L37.795,33.553C40.423,30.046,42,25.709,42,21C42,9.42,32.58,0,21,0S0,9.42,0,21s9.42,21,21,21

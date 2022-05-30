@@ -98,8 +98,7 @@ const Nav = ({activeSlug, movies, loadMoviesData, viewRequested, loadViewRequest
         }
 
         cleanArray.forEach(categoryTitle => {
-            const activeTabStyle = { borderBottom: categoryTitle.slug === activeSlug ? "3px solid #E71" : null};
-            const activePageStyle = { borderBottom: `/${categoryTitle.slug}` === location.pathname ? "3px solid #E71" : null};
+            const activeTabStyle = { borderBottom: categoryTitle.slug === activeSlug ? "3px solid #E71" : (`/${categoryTitle.slug}` === location.pathname ? "3px solid #E71" : null)};
 
             if (categoryTitle.hasOwnProperty('href')) {
                 headers.push(
@@ -107,7 +106,7 @@ const Nav = ({activeSlug, movies, loadMoviesData, viewRequested, loadViewRequest
                         <NavLink to={categoryTitle.href} className={"nav-link"} aria-current={"page"}>
                             <div className={"menu-item-container"} data-slug={categoryTitle.slug}>
                                 <img className={"nav-icon"} src={categoryTitle.icon} alt={categoryTitle.slug} data-slug={categoryTitle.slug} />
-                                <h6 data-slug={categoryTitle.slug} style={activePageStyle}>
+                                <h6 data-slug={categoryTitle.slug} style={activeTabStyle}>
                                     {categoryTitle.label}
                                 </h6>
                             </div>

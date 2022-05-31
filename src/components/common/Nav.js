@@ -8,11 +8,13 @@ import { toast } from "react-toastify";
 import { loadMoviesData } from "../../redux/actions/moviesActions";
 import { loadViewRequested } from "../../redux/actions/viewRequestedActions";
 import { loadSeriesData} from "../../redux/actions/seriesActions";
+import { loadActorsData } from "../../redux/actions/actorsActions";
 import SelectInput from "./SelectInput";
 
-const Nav = ({activeSlug, movies, loadMoviesData, viewRequested, loadViewRequested, series, loadSeriesData, loadActiveSlug}) => {
+const Nav = ({activeSlug, movies, loadMoviesData, viewRequested, loadViewRequested, series, actors, loadSeriesData, loadActiveSlug, loadActorsData}) => {
     const { nowPlaying, popularMovies, topMovies, upcoming, movie, movieImages } = movies;
     const { popularSeries, topSeries, onTheAir, airingToday, serie, serieImages } = series;
+    const { popularActors, actor, actorImages } = actors;
 
     useEffect(() => {
         let categoryToCheck;
@@ -64,7 +66,11 @@ const Nav = ({activeSlug, movies, loadMoviesData, viewRequested, loadViewRequest
                 }, 1000);
             }
         }
-    }, [activeSlug, airingToday, loadMoviesData, loadSeriesData, movie, movieImages, nowPlaying, onTheAir, popularMovies, popularSeries, serie, serieImages, topMovies, topSeries, upcoming, viewRequested]);
+
+        if (popularActors.length === 0) {
+            loadActorsData('popularActors');
+        }
+    }, [activeSlug, airingToday, loadMoviesData, loadSeriesData, movie, movieImages, nowPlaying, onTheAir, popularMovies, popularSeries, serie, serieImages, topMovies, topSeries, upcoming, viewRequested, popularActors]);
 
     const handleClick = (e) => {
         e.preventDefault();
@@ -189,6 +195,7 @@ function mapStateToProps(state) {
         viewRequested: state.viewRequested,
         movies: state.movies,
         series: state.series,
+        actors: state.actors,
     }
 }
 
@@ -197,6 +204,7 @@ const mapDispatchToProps = {
     loadMoviesData,
     loadViewRequested,
     loadSeriesData,
+    loadActorsData,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Nav);

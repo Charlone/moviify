@@ -1,9 +1,4 @@
-import { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import { loadActiveSlug } from "../../redux/actions/activeSlugActions";
-import { loadMoviesData } from "../../redux/actions/moviesActions";
-import { loadSeriesData } from "../../redux/actions/seriesActions";
-import { loadViewRequested } from "../../redux/actions/viewRequestedActions";
 import PropTypes from "prop-types";
 import Switch from "../common/Switch";
 import Spinner from "../common/Spinner";
@@ -11,9 +6,9 @@ import CategorySection from "../common/CategorySection";
 import 'animate.css';
 import "../../styles/Home.scss";
 
-const Home = ({activeSlug, viewRequested, movies, series, loadMoviesData, loadViewRequested, loadActiveSlug}) => {
-    const { nowPlaying, popularMovies, topMovies, upcoming, movie, movieImages } = movies;
-    const { popularSeries, topSeries, onTheAir, airingToday, serie, serieImages } = series;
+const Home = ({activeSlug, movies, series}) => {
+    const { nowPlaying, popularMovies, topMovies, upcoming } = movies;
+    const { popularSeries, topSeries, onTheAir, airingToday } = series;
 
     return (
         <div className={"container mt-1 home-container"}>
@@ -40,12 +35,6 @@ Home.propTypes = {
     activeSlug: PropTypes.string.isRequired,
     viewRequested: PropTypes.string.isRequired,
     movies: PropTypes.object.isRequired,
-    loadMoviesData: PropTypes.func.isRequired,
-    // popularMovies: PropTypes.array.isRequired,
-    // latest: PropTypes.array.isRequired,
-    // nowPlaying: PropTypes.array.isRequired,
-    // topMovies: PropTypes.array.isRequired,
-    // upcoming: PropTypes.array.isRequired,
 }
 
 function mapStateToProps(state) {
@@ -57,10 +46,4 @@ function mapStateToProps(state) {
     }
 }
 
-const mapDispatchToProps = {
-    loadMoviesData,
-    loadViewRequested,
-    loadSeriesData,
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default connect(mapStateToProps)(Home);

@@ -21,6 +21,11 @@ const initialState = {
         serie: [],
         serieImages: []
     },
+    actors: {
+        popularActors: [],
+        actor: [],
+        actorImages: [],
+    },
     headers: {
         movies: [
             {

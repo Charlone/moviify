@@ -1,5 +1,5 @@
-import {useEffect, useState} from "react";
-import {NavLink, useLocation} from "react-router-dom";
+import { useEffect } from "react";
+import { NavLink, useLocation } from "react-router-dom";
 import initialState from "../../redux/reducers/initialState";
 import { connect } from "react-redux";
 import { loadActiveSlug } from "../../redux/actions/activeSlugActions";
@@ -8,11 +8,13 @@ import { toast } from "react-toastify";
 import { loadMoviesData } from "../../redux/actions/moviesActions";
 import { loadViewRequested } from "../../redux/actions/viewRequestedActions";
 import { loadSeriesData} from "../../redux/actions/seriesActions";
+import { loadActorsData } from "../../redux/actions/actorsActions";
+import SelectInput from "./SelectInput";
 
-const Nav = ({activeSlug, movies, loadMoviesData, viewRequested, loadViewRequested, series, loadSeriesData, loadActiveSlug}) => {
+const Nav = ({activeSlug, movies, loadMoviesData, viewRequested, loadViewRequested, series, actors, loadSeriesData, loadActiveSlug, loadActorsData}) => {
     const { nowPlaying, popularMovies, topMovies, upcoming, movie, movieImages } = movies;
     const { popularSeries, topSeries, onTheAir, airingToday, serie, serieImages } = series;
-    const [isLoading, setIsLoading] = useState();
+    const { popularActors, actor, actorImages } = actors;
 
     useEffect(() => {
         let categoryToCheck;
@@ -29,12 +31,8 @@ const Nav = ({activeSlug, movies, loadMoviesData, viewRequested, loadViewRequest
             }
 
             if (categoryToCheck.length === 0) {
-                setIsLoading(true);
                 setTimeout(() => {
                     loadMoviesData(activeSlug)
-                        .then(() => {
-                            setIsLoading(false);
-                        })
                         .catch(error => toast.error("Could not load movies: " + error, {
                                 position: "top-right",
                                 autoClose: 10000,
@@ -56,12 +54,8 @@ const Nav = ({activeSlug, movies, loadMoviesData, viewRequested, loadViewRequest
             }
 
             if (categoryToCheck.length === 0) {
-                setIsLoading(true);
                 setTimeout(() => {
                     loadSeriesData(activeSlug)
-                        .then(() => {
-                            setIsLoading(false);
-                        })
                         .catch(error => toast.error("Could not load movies: " + error, {
                                 position: "top-right",
                                 autoClose: 10000,
@@ -72,7 +66,11 @@ const Nav = ({activeSlug, movies, loadMoviesData, viewRequested, loadViewRequest
                 }, 1000);
             }
         }
-    }, [activeSlug]);
+
+        if (popularActors.length === 0) {
+            loadActorsData('popularActors');
+        }
+    }, [activeSlug, airingToday, loadMoviesData, loadSeriesData, movie, movieImages, nowPlaying, onTheAir, popularMovies, popularSeries, serie, serieImages, topMovies, topSeries, upcoming, viewRequested, popularActors]);
 
     const handleClick = (e) => {
         e.preventDefault();
@@ -107,8 +105,13 @@ const Nav = ({activeSlug, movies, loadMoviesData, viewRequested, loadViewRequest
         }
 
         cleanArray.forEach(categoryTitle => {
-            const activeTabStyle = { borderBottom: categoryTitle.slug === activeSlug ? "3px solid #E71" : null};
-            const activePageStyle = { borderBottom: `/${categoryTitle.slug}` === location.pathname ? "3px solid #E71" : null};
+            let activeTabStyle;
+
+            if (window.innerWidth > 991) {
+                activeTabStyle = {borderBottom: categoryTitle.slug === activeSlug ? "3px solid #E71" : (`/${categoryTitle.slug}` === location.pathname ? "3px solid #E71" : null)};
+            } else {
+                activeTabStyle = {borderLeft: categoryTitle.slug === activeSlug ? "3px solid #E71" : (`/${categoryTitle.slug}` === location.pathname ? "3px solid #E71" : null), paddingLeft: "0.2rem"};
+            }
 
             if (categoryTitle.hasOwnProperty('href')) {
                 headers.push(
@@ -116,7 +119,7 @@ const Nav = ({activeSlug, movies, loadMoviesData, viewRequested, loadViewRequest
                         <NavLink to={categoryTitle.href} className={"nav-link"} aria-current={"page"}>
                             <div className={"menu-item-container"} data-slug={categoryTitle.slug}>
                                 <img className={"nav-icon"} src={categoryTitle.icon} alt={categoryTitle.slug} data-slug={categoryTitle.slug} />
-                                <h6 data-slug={categoryTitle.slug} style={activePageStyle}>
+                                <h6 data-slug={categoryTitle.slug} style={activeTabStyle}>
                                     {categoryTitle.label}
                                 </h6>
                             </div>
@@ -160,8 +163,10 @@ const Nav = ({activeSlug, movies, loadMoviesData, viewRequested, loadViewRequest
                     <ul className={"navbar-nav me-auto mb-2 mb-lg-0"}>
                         <Headers />
                     </ul>
+
                     <form className="d-flex search-container">
-                        <input className="form-control me-2 search-input" type="search" placeholder="Search" aria-label="Search" />
+                        <SelectInput name={"search-category"} />
+                        <input className="form-control search-input" type="search" placeholder="Search" aria-label="Search" />
                         <button className={"btn search-button"} type="submit">
                             <svg fill="#E71" width={"25px"} height={"25px"} version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 53.627 53.627" style={{enableBackground:"new 0 0 53.627 53.627"}}>
                                 <path d="M53.627,49.385L37.795,33.553C40.423,30.046,42,25.709,42,21C42,9.42,32.58,0,21,0S0,9.42,0,21s9.42,21,21,21
@@ -190,6 +195,7 @@ function mapStateToProps(state) {
         viewRequested: state.viewRequested,
         movies: state.movies,
         series: state.series,
+        actors: state.actors,
     }
 }
 
@@ -198,6 +204,7 @@ const mapDispatchToProps = {
     loadMoviesData,
     loadViewRequested,
     loadSeriesData,
+    loadActorsData,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Nav);

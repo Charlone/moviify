@@ -5,9 +5,19 @@ import { loadViewRequested } from "../../redux/actions/viewRequestedActions";
 import { loadActorsData } from "../../redux/actions/actorsActions";
 import ActorsSection from "../common/ActorsSection";
 import Spinner from "../common/Spinner";
+import {useEffect} from "react";
 
-const Actors = ({activeSlug, viewRequested, actors, loadActorData}) => {
+const Actors = ({activeSlug, viewRequested, actors, loadActorsData}) => {
     const { popularActors, actor, actorImage } = actors;
+
+    useEffect(() => {
+        return () => {
+            if (popularActors.length === 0) {
+                loadActorsData('popularActors')
+            }
+        };
+    }, [popularActors]);
+
 
     return (
         <div className={"container"}>

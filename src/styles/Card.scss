@@ -33,9 +33,14 @@
 }
 
 .splide {
+  .splide__arrow:focus-visible {
+    outline: 3px solid $base-secondary-color;
+    outline-offset: 3px;
+  }
+
   .splide__pagination {
-    bottom: unset;
-    margin: 5px;
+    position: absolute;
+    bottom: 5px;
 
     .splide__pagination__page {
       background-color: $blend-color;

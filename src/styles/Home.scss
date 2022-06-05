@@ -1,18 +1,22 @@
 @import "utils/variables";
 
-.section {
-  padding: 1rem 0;
+.home-container {
+  overflow-y: hidden;
 
-  .main-container {
-    .category-header-container {
-      display: flex;
-      flex-direction: row;
-      flex-wrap: nowrap;
-      align-items: center;
-      align-content: stretch;
-      justify-content: flex-end;
-      width: 100%;
-      min-height: 50px;
+  .section {
+    padding: 1rem 0;
+
+    .main-container {
+      .category-header-container {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        align-items: center;
+        align-content: stretch;
+        justify-content: flex-end;
+        width: 100%;
+        min-height: 50px;
+      }
     }
   }
 }

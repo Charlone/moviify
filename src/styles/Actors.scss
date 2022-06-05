@@ -7,7 +7,7 @@
 .popular-actors-section {
   .actor-container {
     .actor {
-      border: 1px solid $base-secondary-color;
+      border: 2px outset $base-secondary-color;
       padding: 20px;
       border-radius: 10px;
       box-shadow: 1px 1px 5px 0 $blend-color;
@@ -21,6 +21,8 @@
 
         .actor-image {
           height: auto;
+          border: 1px solid $base-secondary-color;
+          box-shadow: 1px 1px 5px 0 $blend-color;
         }
       }
     }

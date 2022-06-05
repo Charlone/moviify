@@ -11,7 +11,7 @@ const CategorySection = ({cards}) => {
         autoplay: false,
         start: 0,
         drag: true,
-        pagination: true,
+        pagination: false,
         perPage: 6,
         perMove: 1,
         updateOnMove: true,

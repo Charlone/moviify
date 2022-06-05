@@ -6,12 +6,7 @@ import * as activeSlugActions from "../../redux/actions/activeSlugActions";
 import { connect } from "react-redux";
 import "../../styles/Switch.scss";
 
-
 class Switch extends React.Component {
-    // componentDidMount() {
-    //     const { viewRequested, actions } = this.props;
-    // }
-
     handleOnChange = () => {
         this.props.actions.activeSlug(this.props.viewRequested === 'movies' ? 'popularSeries' : 'popularMovies');
         this.props.actions.viewRequested(this.props.viewRequested === 'movies' ? 'series' : 'movies');
@@ -38,7 +33,6 @@ Switch.propTypes = {
 function mapStateToProps(state) {
     return {
         viewRequested: state.viewRequested,
-        apiCallsInProgress: state.apiCallsInProgress,
         activeSlug: state.activeSlug,
     }
 }

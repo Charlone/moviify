@@ -31,6 +31,7 @@ const CategorySection = ({cards}) => {
                     posterPath={"https://image.tmdb.org/t/p/w300/" + card.poster_path}
                     voteAverage={card.vote_average}
                     overview={card.overview}
+                    href={card.title ? `/movie/${card.id}` : `/serie/${card.id}` }
                 />
             </SplideSlide>
         );

@@ -4,7 +4,7 @@ const truncateText = (text, length) => {
     return text.length > length ? text.substring(0, length) + '...' : text;
 }
 
-const Card = ({originalTitle, posterPath, voteAverage, overview}) => {
+const Card = ({originalTitle, posterPath, voteAverage, overview, href}) => {
     return (
         <div className="card text-black">
             <img src={posterPath} className="card-img-top" alt="poster" />
@@ -15,7 +15,7 @@ const Card = ({originalTitle, posterPath, voteAverage, overview}) => {
                     {voteAverage}
                 </p>
                 <p className="card-text">{truncateText(overview, 44)}</p>
-                <a href="#" className="btn read-more">Read more</a>
+                <a href={href} className="btn read-more">Read more</a>
             </div>
         </div>
     );

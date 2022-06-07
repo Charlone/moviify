@@ -16,7 +16,7 @@ export const getMovies = async (type, movieId = null) => {
         case "genre": path = '/genre/movie/list'; break;
         case "recommended": path = `/movie/${movieId}/recommendations`; break;
         case "movie": path = `/movie/${movieId}`; break;
-        case "images": path = `/movie/${movieId}/images`; break;
+        case "movieVideos": path = `/movie/${movieId}/videos`; break;
         default: return handleError("No registered endpoint for specified type - " + type);
     }
 

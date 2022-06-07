@@ -9,7 +9,8 @@ const initialState = {
         upcoming: [],
         recommended: [],
         movie: [],
-        movieImages: []
+        movieImages: [],
+        movieVideos: [],
     },
     series: {
         popularSeries: [],
@@ -31,39 +32,39 @@ const initialState = {
             {
                 label: "Popular",
                 slug: "popularMovies",
-                icon: "star.svg"
+                icon: "/star.svg"
             },
             {
                 label: "Top Rated",
                 slug: "topMovies",
-                icon: "trophy.svg"
+                icon: "/trophy.svg"
             },
             {
                 label: "Now Playing",
                 slug: "nowPlaying",
-                icon: "play.svg"
+                icon: "/play.svg"
             },
             {
                 label: "Upcoming",
                 slug: "upcoming",
-                icon: "movie.svg"
+                icon: "/movie.svg"
             },
             {
                 label: "Actors",
                 slug: "actors",
-                icon: "actors.svg",
+                icon: "/actors.svg",
                 href: "/actors"
             },
             {
                 label: "Movies",
                 slug: "movies",
-                icon: "movie.svg",
+                icon: "/movie.svg",
                 href: "/"
             },
             {
                 label: "Series",
                 slug: "series",
-                icon: "monitor.svg",
+                icon: "/monitor.svg",
                 href: "/"
             }
         ],
@@ -71,27 +72,27 @@ const initialState = {
             {
                 label: "Popular",
                 slug: "popularSeries",
-                icon: "star.svg"
+                icon: "/star.svg"
             },
             {
                 label: "Top Rated",
                 slug: "topSeries",
-                icon: "trophy.svg"
+                icon: "/trophy.svg"
             },
             {
                 label: "On The Air",
                 slug: "onTheAir",
-                icon: "film.svg"
+                icon: "/film.svg"
             },
             {
                 label: "Airing Today",
                 slug: "airingToday",
-                icon: "monitor.svg"
+                icon: "/monitor.svg"
             },
             {
                 label: "Actors",
                 slug: "actors",
-                icon: "actors.svg",
+                icon: "/actors.svg",
                 href: "/actors"
             },
             {
@@ -103,7 +104,7 @@ const initialState = {
             {
                 label: "Series",
                 slug: "series",
-                icon: "monitor.svg",
+                icon: "/monitor.svg",
                 href: "/"
             }
         ]

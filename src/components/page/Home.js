@@ -7,24 +7,25 @@ import CategorySection from "../common/CategorySection";
 import Preloader from "../common/Preloader";
 import { loadMoviesData } from "../../redux/actions/moviesActions";
 import { loadSeriesData } from "../../redux/actions/seriesActions";
+import { loadActorsData } from "../../redux/actions/actorsActions"
 import { FetchAll } from "../common/DataHandle";
 import 'animate.css';
-import "../../styles/Home.scss";
+import "../../styles/Home.scss";;
 
-const Home = ({activeSlug, movies, series, loadMoviesData, loadSeriesData }) => {
+const Home = ({activeSlug, movies, series, loadMoviesData, loadSeriesData, loadActorsData }) => {
     const { nowPlaying, popularMovies, topMovies, upcoming } = movies;
     const { popularSeries, topSeries, onTheAir, airingToday } = series;
     const [ isLoading, setIsLoading ] = useState(true);
 
     useEffect(() => {
         return () => {
-            FetchAll(loadMoviesData, loadSeriesData);
+            FetchAll(loadMoviesData, loadSeriesData, loadActorsData);
 
             setTimeout(() => {
                 setIsLoading(false);
             }, 1000);
         }
-    }, [FetchAll]);
+    }, [loadMoviesData, loadSeriesData, loadActorsData]);
 
     return (
         <>
@@ -70,6 +71,7 @@ function mapStateToProps(state) {
 const mapDispatchToProps = {
     loadMoviesData,
     loadSeriesData,
+    loadActorsData
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

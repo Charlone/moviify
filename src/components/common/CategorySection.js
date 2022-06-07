@@ -29,7 +29,7 @@ const CategorySection = ({cards}) => {
                 <Card
                     originalTitle={card.title ? card.title : card.name}
                     posterPath={"https://image.tmdb.org/t/p/w300/" + card.poster_path}
-                    voteAverage={card.vote_average}
+                    voteAverage={parseFloat(card.vote_average).toFixed(1)}
                     overview={card.overview}
                     href={card.title ? `/movie/${card.id}` : `/serie/${card.id}` }
                 />

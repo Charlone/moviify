@@ -73,7 +73,7 @@ export function FetchAll(loadMoviesData, loadSeriesData, loadActorsData) {
             case "topSeries":
             case "onTheAir":
             case "airingToday": loadSeriesData(category); break;
-            case "airingToday": loadActorsData(category); break;
+            case "popularActors": loadActorsData(category); break;
             default: return;
         }
     })

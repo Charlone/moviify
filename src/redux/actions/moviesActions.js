@@ -30,8 +30,8 @@ export function loadMovieSuccess(movie) {
     return { type: types.GET_MOVIE_SUCCESS, movie }
 }
 
-export function loadMovieImagesSuccess(movieImage) {
-    return { type: types.GET_MOVIE_IMAGES_SUCCESS, movieImage }
+export function loadMovieVideosSuccess(movieVideos) {
+    return { type: types.GET_MOVIE_VIDEOS_SUCCESS, movieVideos }
 }
 
 export function loadMoviesData(type, movieId = null) {
@@ -48,7 +48,7 @@ export function loadMoviesData(type, movieId = null) {
                     case "genre": dispatch(loadMoviesGenreSuccess(movieData)); break;
                     case "recommended": dispatch(loadRecommendedMoviesSuccess(movieData, movieId)); break;
                     case "movie": dispatch(loadMovieSuccess(movieData, movieId)); break;
-                    case "movieImages": dispatch(loadMovieImagesSuccess(movieData, movieId)); break;
+                    case "movieVideos": dispatch(loadMovieVideosSuccess(movieData, movieId)); break;
                     default: return;
                 }
             })

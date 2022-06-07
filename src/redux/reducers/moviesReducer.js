@@ -16,9 +16,9 @@ export default function moviesReducer(state = initialState.movies, action) {
         case types.GET_RECOMMENDED_MOVIES_SUCCESS:
             return Object.assign({}, state, {recommended: action.recommendedMovies.results});
         case types.GET_MOVIE_SUCCESS:
-            return Object.assign({}, state, {movie: action.movie.results});
-        case types.GET_MOVIE_IMAGES_SUCCESS:
-            return Object.assign({}, state, {movieImages: action.movieImage.results});
+            return Object.assign({}, state, {movie: action.movie});
+        case types.GET_MOVIE_VIDEOS_SUCCESS:
+            return Object.assign({}, state, {movieVideos: action.movieVideos.results})
         default:
             return state;
     }

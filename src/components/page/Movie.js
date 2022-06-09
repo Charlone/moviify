@@ -71,14 +71,14 @@ const Movie = ({movies, loadMoviesData}) => {
         const hourDisplay = hour > 0 ? `${hour}h ` : '',
             minDisplay = min > 0 ? `${min}m` : '';
 
-        return hourDisplay + minDisplay;
+        return (hourDisplay + minDisplay) === '' ? 'TBA' : hourDisplay + minDisplay;
     }
 
     const dateFormatter = (date) => {
         const dateToFormat = new Date(date),
             options = { year: 'numeric', month: 'short', day: 'numeric' };
 
-        return dateToFormat.toLocaleDateString("en-US", options);
+        return dateToFormat.toLocaleDateString("en-US", options) === 'Invalid Date' ? 'TBA' : dateToFormat.toLocaleDateString("en-US", options);
     }
 
     const MoreVideosSlider = ({movieVideos}) => {
@@ -112,7 +112,9 @@ const Movie = ({movies, loadMoviesData}) => {
                                 {movie.title}
                             </strong>
                         </h3>
-                        <span>{movie.tagline}</span>
+                        {movie.tagline ? (<span>{movie.tagline}</span>) : null}
+                        {movie.tagline && movie.homepage ? (<span> - </span>) : null}
+                        {movie.homepage ? (<span><a className={"text-white text-decoration-none"} href={movie.homepage} target={"_blank"}>{movie.homepage}</a></span>) : null}
                     </div>
                     <div className={"movie-menu-bar"}>
                         <div className={"genre-container"}>

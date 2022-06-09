@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import { useParams } from "react-router-dom";
-import { useEffect } from "react";
+import {useEffect, useState} from "react";
 import PropTypes from "prop-types";
 import { loadMoviesData } from "../../redux/actions/moviesActions";
 import Spinner from "../common/Spinner";
@@ -12,6 +12,7 @@ import CategorySection from "../common/CategorySection";
 const Movie = ({movies, loadMoviesData}) => {
     const {movie, movieVideos, recommended} = movies
     let {id} = useParams();
+    const [stopLoading, setStopLoading] = useState(false);
     const sliderOptions = {
         rewind: true,
         gap: "1rem",
@@ -38,20 +39,25 @@ const Movie = ({movies, loadMoviesData}) => {
                 loadMoviesData('movieVideos', id);
             }
 
-            if (recommended.length === 0) {
+            if (stopLoading) {
+                return;
+            } else if (recommended.length === 0) {
                 loadMoviesData('recommended', id);
+                setStopLoading(true);
             }
         }
-    })
+    }, [stopLoading])
 
     const Genres = ({genres}) => {
         let genresToDisplay = [];
 
-        genres.forEach(genre => {
-            genresToDisplay.push(
-                <div key={genre.id} className={"genre"}>{genre.name}</div>
-            );
-        });
+        if (genres.length > 0) {
+            genres.forEach(genre => {
+                genresToDisplay.push(
+                    <div key={genre.id} className={"genre"}>{genre.name}</div>
+                );
+            });
+        }
 
         return genresToDisplay;
     }
@@ -143,7 +149,7 @@ const Movie = ({movies, loadMoviesData}) => {
                                     Languages
                                 </strong>
                             </h6>
-                            <span>{movie.spoken_languages.map(language => `${language.name} `)}</span>
+                            <span>{movie.spoken_languages.map(language => `${language.name} `) ?? "TBA"}</span>
                         </div>
                     </div>
                     <div className={"movie-body mt-3"}>
@@ -152,22 +158,33 @@ const Movie = ({movies, loadMoviesData}) => {
                                 <img src={"https://image.tmdb.org/t/p/w300/" + movie.poster_path} alt={movie.title}/>
                             </div>
                             <div className={"overview"}>
-                                {movieVideos.length === 0 ? <Spinner /> : <YoutubeEmbed embedId={movieVideos[0].key} width={"100%"} height={"450px"} />}
+                                {
+                                    movieVideos.length > 0
+                                        ? <YoutubeEmbed embedId={movieVideos[0].key} width={"100%"} height={"450px"} />
+                                        : <div><h6 className={"no-movies"}>No video currently available.</h6></div>
+                                }
                             </div>
                         </div>
                         <div className={'overview-text'}>
                             <p>{movie.overview}</p>
                         </div>
                     </div>
-                    <div className={"more-videos"}>
-                        <Splide options={sliderOptions}>
-                            <MoreVideosSlider movieVideos={movieVideos} width={"33.33%"} height={"400px"} />
-                        </Splide>
-                    </div>
-                    <div className={"recommendations"}>
-                        <h4 className={'recommendations-header'}>Other titles you may like</h4>
-                        <CategorySection cards={recommended} />
-                    </div>
+                    {
+                        movieVideos.length > 0
+                            ? (<div className={"more-videos"}>
+                                <Splide options={sliderOptions}>
+                                    <MoreVideosSlider movieVideos={movieVideos} width={"33.33%"} height={"400px"} />
+                                </Splide>
+                            </div>)
+                            : null
+                    }
+                    {
+                        recommended.length > 0 &&
+                        <div className={"recommendations"}>
+                            <h4 className={'recommendations-header'}>Other titles you may like</h4>
+                            <CategorySection cards={recommended} />
+                        </div>
+                    }
                 </div>
             }
         </>

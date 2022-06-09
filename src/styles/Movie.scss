@@ -32,7 +32,7 @@
       flex-wrap: wrap;
       flex-direction: row;
       align-content: center;
-      justify-content: space-evenly;
+      justify-content: flex-start;
       align-items: center;
       margin: 10px 0;
 
@@ -41,6 +41,7 @@
         box-shadow: 1px 1px 5px 0 $blend-color;
         border-radius: 100px;
         padding: 10px;
+        margin: 0 5px;
       }
     }
   }
@@ -51,6 +52,16 @@
 
       .overview {
         width: 100%;
+
+        .no-movies {
+          display: flex;
+          flex-direction: row;
+          flex-wrap: nowrap;
+          align-content: center;
+          justify-content: center;
+          align-items: center;
+          height: 450px;
+        }
       }
     }
 
@@ -61,13 +72,14 @@
   }
 
   .more-videos {
+    margin-bottom: 25px;
     .more-videos-vid {
       width: 33.33%;
     }
   }
 
   .recommendations {
-    margin: 25px 0;
+    margin-bottom: 25px;
 
     .recommendations-header {
       font-variant: small-caps;

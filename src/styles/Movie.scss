@@ -1,88 +1,93 @@
 @import "../styles/utils/variables";
 
-.movie-container {
-  color: $font-color;
+.movie-page-container {
+  .movie-container {
+    min-height: 100vh;
+    color: $font-color;
 
-  .movie-title {
-    padding: 0 1rem;
-    margin-top: 15px;
+    .movie-title {
+      padding: 0 1rem;
+      margin-top: 15px;
 
-    .movie-title-header {
-      font-variant: small-caps;
-    }
-  }
-
-  .movie-menu-bar {
-    display: flex;
-    width: 100%;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    align-content: center;
-    justify-content: space-between;
-    align-items: center;
-
-    .heading {
-      color: $header-font-color;
-      font-variant: small-caps;
-    }
-
-    .genre-container {
-      width: 50%;
-      display: flex;
-      flex-wrap: wrap;
-      flex-direction: row;
-      align-content: center;
-      justify-content: flex-start;
-      align-items: center;
-      margin: 10px 0;
-
-      .genre {
-        border: 1px solid $base-secondary-color;
-        box-shadow: 1px 1px 5px 0 $blend-color;
-        border-radius: 100px;
-        padding: 10px;
-        margin: 0 5px;
+      .movie-title-header {
+        font-variant: small-caps;
       }
     }
-  }
 
-  .movie-body {
-    .movie-info {
+    .movie-menu-bar {
       display: flex;
+      width: 100%;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      align-content: center;
+      justify-content: space-between;
+      align-items: center;
 
-      .overview {
-        width: 100%;
+      .heading {
+        color: $header-font-color;
+        font-variant: small-caps;
+      }
 
-        .no-movies {
-          display: flex;
-          flex-direction: row;
-          flex-wrap: nowrap;
-          align-content: center;
-          justify-content: center;
-          align-items: center;
-          height: 450px;
+      .genre-container {
+        width: 50%;
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        align-content: center;
+        justify-content: flex-start;
+        align-items: center;
+        margin: 10px 0;
+
+        .genre {
+          border: 1px solid $base-secondary-color;
+          box-shadow: 1px 1px 5px 0 $blend-color;
+          border-radius: 100px;
+          padding: 10px;
+          margin: 0 5px;
         }
       }
     }
 
-    .overview-text {
-      padding: 15px 0;
-      font-size: large;
+    .movie-body {
+      .movie-info {
+        display: flex;
+
+        .overview {
+          width: 100%;
+
+          .no-movies {
+            background-color: $base-secondary-color;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            align-content: center;
+            justify-content: center;
+            align-items: center;
+            height: 450px;
+          }
+        }
+      }
+
+      .overview-text {
+        padding: 15px 0;
+        font-size: large;
+      }
     }
-  }
 
-  .more-videos {
-    margin-bottom: 25px;
-    .more-videos-vid {
-      width: 33.33%;
+    .more-videos {
+      margin-bottom: 25px;
+
+      .more-videos-vid {
+        width: 33.33%;
+      }
     }
-  }
 
-  .recommendations {
-    margin-bottom: 25px;
+    .recommendations {
+      margin-bottom: 25px;
 
-    .recommendations-header {
-      font-variant: small-caps;
+      .recommendations-header {
+        font-variant: small-caps;
+      }
     }
   }
 }

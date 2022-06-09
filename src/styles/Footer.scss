@@ -1,0 +1,22 @@
+@import "utils/variables";
+
+.footer-container {
+  margin-top: 20px;
+  position: absolute;
+  width: 100%;
+
+  .footer {
+    border-top: 2px solid $border-color;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    color: $font-color;
+    padding: 10px;
+    font-size: small;
+  }
+}

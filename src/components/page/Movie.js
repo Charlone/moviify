@@ -8,11 +8,13 @@ import YoutubeEmbed from "../common/YoutubeEmbed";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import '../../styles/Movie.scss';
 import CategorySection from "../common/CategorySection";
+import Footer from "../common/Footer";
 
 const Movie = ({movies, loadMoviesData}) => {
     const {movie, movieVideos, recommended} = movies
     let {id} = useParams();
     const [stopLoading, setStopLoading] = useState(false);
+    const [ isLoading, setIsLoading ] = useState(true);
     const sliderOptions = {
         rewind: true,
         gap: "1rem",
@@ -45,6 +47,11 @@ const Movie = ({movies, loadMoviesData}) => {
                 loadMoviesData('recommended', id);
                 setStopLoading(true);
             }
+
+            setTimeout(() => {
+                setIsLoading(false);
+            }, 500)
+
         }
     }, [stopLoading])
 
@@ -102,7 +109,7 @@ const Movie = ({movies, loadMoviesData}) => {
     }
 
     return (
-        <>
+        <div className={'movie-page-container'}>
             {
                 movie.length === 0 && movieVideos.length === 0 ? <Spinner /> :
                 <div className={"container movie-container"}>
@@ -189,7 +196,8 @@ const Movie = ({movies, loadMoviesData}) => {
                     }
                 </div>
             }
-        </>
+            <Footer isLoading={isLoading} />
+        </div>
     );
 }
 

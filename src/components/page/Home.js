@@ -1,16 +1,17 @@
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import Switch from "../common/Switch";
 import Spinner from "../common/Spinner";
 import CategorySection from "../common/CategorySection";
 import Preloader from "../common/Preloader";
+import Footer from "../common/Footer";
 import { loadMoviesData } from "../../redux/actions/moviesActions";
 import { loadSeriesData } from "../../redux/actions/seriesActions";
 import { loadActorsData } from "../../redux/actions/actorsActions"
 import { FetchAll } from "../common/DataHandle";
 import 'animate.css';
-import "../../styles/Home.scss";;
+import "../../styles/Home.scss";
 
 const Home = ({activeSlug, movies, series, loadMoviesData, loadSeriesData, loadActorsData }) => {
     const { nowPlaying, popularMovies, topMovies, upcoming } = movies;
@@ -28,7 +29,7 @@ const Home = ({activeSlug, movies, series, loadMoviesData, loadSeriesData, loadA
     }, [loadMoviesData, loadSeriesData, loadActorsData]);
 
     return (
-        <>
+        <div className={"home"}>
             {isLoading && <Preloader />}
             <div className={"container mt-1 home-container"}>
                 <section className={"section text-white  m-0 p-0"}>
@@ -47,7 +48,8 @@ const Home = ({activeSlug, movies, series, loadMoviesData, loadSeriesData, loadA
                     </div>
                 </section>
             </div>
-        </>
+            <Footer isLoading={isLoading}/>
+        </div>
     );
 }
 

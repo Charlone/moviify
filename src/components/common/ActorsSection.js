@@ -33,6 +33,7 @@ const ActorsBody = ({popularActors}) => {
                         posterPath={"https://image.tmdb.org/t/p/w300/" + item.poster_path}
                         voteAverage={item.vote_average}
                         overview={item.overview}
+                        href={item.title ? `/movie/${item.id}` : `/serie/${item.id}` }
                     />
                 </SplideSlide>
             );

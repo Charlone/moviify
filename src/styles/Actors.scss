@@ -1,5 +1,11 @@
 @import "utils/variables";
 
+.actors-container {
+  .container {
+    min-height: 100vh;
+  }
+}
+
 .subheading {
   font-variant: small-caps;
 }

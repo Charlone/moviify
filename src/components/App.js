@@ -9,13 +9,13 @@ function App() {
   return (
   <BrowserRouter>
     <Nav />
-      <Routes>
-        <Route exact path="/" element={<Home />} />
-        <Route path="/movie/:id" element={<Movie />} />
-        <Route path="/serie/:id" />
-        <Route path="/actors" element={<Actors />} />
-        <Route path="/actor/:id" />
-      </Routes>
+    <Routes>
+      <Route exact path="/" element={<Home />} />
+      <Route path="/movie/:id" element={<Movie />} />
+      <Route path="/serie/:id" />
+      <Route path="/actors" element={<Actors />} />
+      <Route path="/actor/:id" />
+    </Routes>
   </BrowserRouter>
   );
 }

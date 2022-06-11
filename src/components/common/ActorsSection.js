@@ -30,7 +30,7 @@ const ActorsBody = ({popularActors}) => {
                 <SplideSlide key={item.id}>
                     <Card
                         originalTitle={item.title ? item.title : item.name}
-                        posterPath={"https://image.tmdb.org/t/p/w300/" + item.poster_path}
+                        posterPath={process.env.REACT_APP_API_POSTER_PATH + item.poster_path}
                         voteAverage={item.vote_average}
                         overview={item.overview}
                         href={item.title ? `/movie/${item.id}` : `/serie/${item.id}` }
@@ -48,7 +48,7 @@ const ActorsBody = ({popularActors}) => {
                                 <div className={'actor-header'}>
                                     <h5 className={'actor-name'}>{ranking++}. {actor.name}</h5>
                                 </div>
-                                <img className={"actor-image"} src={"https://image.tmdb.org/t/p/w300/" + actor.profile_path} />
+                                <img className={"actor-image"} src={process.env.REACT_APP_API_POSTER_PATH + actor.profile_path} />
                             </div>
                             <div className={"actor-body col-md-8"}>
                                 <div className={"actor-info"}>

@@ -17,8 +17,10 @@ export default function seriesReducer(state = initialState.series, action) {
             return Object.assign({}, state, {similar: action.similarSeries.results});
         case types.GET_SERIE_SUCCESS:
             return Object.assign({}, state, {serie: action.serie});
-        case types.GET_SERIE_IMAGES_SUCCESS:
-            return Object.assign({}, state, {seriesImages: action.serieImage.results});
+        case types.GET_SERIES_RECOMMENDED_SUCCESS:
+            return Object.assign({}, state, {seriesRecommended: action.seriesRecommended.results});
+        case types.GET_SERIE_VIDEOS_SUCCESS:
+            return Object.assign({}, state, {serieVideos: action.serieVideos.results});
         default:
             return state;
     }

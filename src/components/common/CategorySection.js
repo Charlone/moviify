@@ -28,7 +28,7 @@ const CategorySection = ({cards}) => {
             <SplideSlide key={card.id}>
                 <Card
                     originalTitle={card.title ? card.title : card.name}
-                    posterPath={"https://image.tmdb.org/t/p/w300/" + card.poster_path}
+                    posterPath={process.env.REACT_APP_API_POSTER_PATH + card.poster_path}
                     voteAverage={parseFloat(card.vote_average).toFixed(1)}
                     overview={card.overview}
                     href={card.title ? `/movie/${card.id}` : `/serie/${card.id}` }

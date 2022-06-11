@@ -30,8 +30,12 @@ export function loadSerieSuccess(serie) {
     return { type: types.GET_SERIE_SUCCESS, serie }
 }
 
-export function loadSerieImagesSuccess(serieImage) {
-    return { type: types.GET_SERIE_IMAGES_SUCCESS, serieImage }
+export function loadSeriesRecommendedSuccess(seriesRecommended) {
+    return { type: types.GET_SERIES_RECOMMENDED_SUCCESS, seriesRecommended }
+}
+
+export function loadSerieVideosSuccess(serieVideos) {
+    return { type: types.GET_SERIE_VIDEOS_SUCCESS, serieVideos }
 }
 
 export function loadSeriesData(type, serieId = null) {
@@ -48,7 +52,8 @@ export function loadSeriesData(type, serieId = null) {
                     case "recommended": dispatch(loadRecommendedSeriesSuccess(serieData)); break;
                     case "similar": dispatch(loadSimilarSeriesSuccess(serieData)); break;
                     case "serie": dispatch(loadSerieSuccess(serieData, serieId)); break;
-                    case "serieImages": dispatch(loadSerieImagesSuccess(serieData, serieId)); break;
+                    case "seriesRecommended": dispatch(loadSeriesRecommendedSuccess(serieData, serieId)); break;
+                    case "serieVideos": dispatch(loadSerieVideosSuccess(serieData, serieId)); break;
                     default: return;
                 }
             })

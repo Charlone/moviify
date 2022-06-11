@@ -17,10 +17,10 @@ const initialState = {
         topSeries: [],
         onTheAir: [],
         airingToday: [],
-        recommended: [],
         similar: [],
         serie: [],
-        serieImages: []
+        seriesRecommended: [],
+        serieVideos: [],
     },
     actors: {
         popularActors: [],

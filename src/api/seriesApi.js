@@ -16,7 +16,8 @@ export const getSeries = async (type, serieId = null) => {
         case "recommended": path = `/tv/${serieId}/recommendations`; break;
         case "similar": path = `/tv/${serieId}/similar`; break;
         case "serie": path = `/tv/${serieId}`; break;
-        case "serieImages": path = `/tv/${serieId}/images`; break;
+        case "seriesRecommended": path = `/tv/${serieId}/recommendations`; break;
+        case "serieVideos": path = `/tv/${serieId}/videos`; break;
         default: return handleError("No registered endpoint for specified type - " + type);
     }
 

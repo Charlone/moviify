@@ -5,16 +5,8 @@ import PropTypes from "prop-types";
 import { loadSeriesData } from "../../redux/actions/seriesActions";
 import Spinner from "../common/Spinner";
 import Footer from "../common/Footer";
+import { AdditionalInformationComponent, AuthorComponent, MenuComponent, MoreVideos, PosterAndVideo, RecommendedComponent, TitleComponent, SeasonsComponent } from "../common/CommonMovieSerieComponents";
 import '../../styles/Movie.scss';
-import {
-    AdditionalInformationComponent,
-    AuthorComponent,
-    MenuComponent,
-    MoreVideos,
-    PosterAndVideo,
-    RecommendedComponent,
-    TitleComponent
-} from "../common/CommonMovieSerieComponents";
 
 const Serie = ({series, loadSeriesData}) => {
     const {serie, serieVideos, seriesRecommended} = series
@@ -46,15 +38,6 @@ const Serie = ({series, loadSeriesData}) => {
         }
     }, [stopLoading]);
 
-    // const Seasons = (seasons) => {
-    //     let seasonsToShow = [];
-    //     seasons.forEach(season => {
-    //         seasonsToShow.push(
-    //             <CategorySection cards={seasons} />
-    //         )
-    //     })
-    // }
-
     return (
         <div className={'movie-page-container'}>
             {
@@ -64,17 +47,19 @@ const Serie = ({series, loadSeriesData}) => {
                         <MenuComponent data={serie} />
                         <PosterAndVideo data={serie} dataVideos={serieVideos} />
                         {serieVideos.length > 0 && <MoreVideos dataVideos={serieVideos} />}
-                        <div className={'authors-and-info d-flex'}>
-                            {serie.created_by.length > 0 && <AuthorComponent data={serie} />}
-                            <AdditionalInformationComponent data={serie} />
-                        </div>
                         <div className={"seasons"}>
                             <div className={'header'}>
                                 <h5>Seasons</h5>
-                            {/*    TODO */}
+                            </div>
+                            <SeasonsComponent seasons={serie.seasons} />
+                        </div>
+                        <div className={'authors-and-info'}>
+                            <div className={'authors-and-info-section'}>
+                                {serie.created_by.length > 0 && <AuthorComponent data={serie} />}
+                                <AdditionalInformationComponent data={serie} />
                             </div>
                         </div>
-                        {seriesRecommended.length && <RecommendedComponent dataRecommended={seriesRecommended} />}
+                        {seriesRecommended.length > 0 && <RecommendedComponent dataRecommended={seriesRecommended} />}
                     </div>
             }
             <Footer isLoading={isLoading} />

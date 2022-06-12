@@ -2,9 +2,14 @@ import { Genres, MoreVideosSlider, sliderOptions } from "./DataHandle";
 import { getDuration } from "./DataHandle";
 import { dateFormatter } from "./DataHandle";
 import YoutubeEmbed from "./YoutubeEmbed";
-import {Splide} from "@splidejs/react-splide";
+import {Splide, SplideSlide} from "@splidejs/react-splide";
 import CategorySection from "./CategorySection";
 import Author from "./Author";
+import Card from "./Card";
+
+export const truncateText = (text, length) => {
+    return text.length > length ? text.substring(0, length) + '...' : text;
+}
 
 export const TitleComponent = ({data}) => {
     return (
@@ -155,7 +160,7 @@ export const RecommendedComponent = ({dataRecommended}) => {
 export const AdditionalInformationComponent = ({data}) => {
     return (
         <div className={"additional-info"}>
-            <h5>
+            <h5 className={"header"}>
                 <strong>
                     Additional Information
                 </strong>
@@ -170,4 +175,51 @@ export const AdditionalInformationComponent = ({data}) => {
             </ul>
         </div>
     );
+}
+
+const Seasons = ({seasons}) => {
+    let seasonsToShow = [];
+    seasons.forEach(season => {
+        if (season.season_number !== 0) {
+            seasonsToShow.push(
+                <SplideSlide key={season.id}>
+                    <Card
+                        originalTitle={`Season ${season.season_number}`}
+                        posterPath={process.env.REACT_APP_API_POSTER_PATH + season.poster_path}
+                        voteAverage={parseFloat(season.vote_average).toFixed(1)}
+                        overview={season.overview || "No information currently available"}
+                        href={season.title ? `/movie/${season.id}` : `/serie/${season.id}`}
+                    />
+                </SplideSlide>
+            )
+        }
+    });
+
+    return seasonsToShow;
+}
+
+export const SeasonsComponent = ({seasons}) => {
+    const options = {
+        rewind: true,
+        gap: "1rem",
+        type: 'slider',
+        arrows: 'slider',
+        autoplay: false,
+        start: 0,
+        drag: true,
+        pagination: false,
+        perPage: 5,
+        perMove: 1,
+        updateOnMove: true,
+        height: "auto",
+        width: "100%",
+    };
+
+    return (
+        <div className={"seasons-body"}>
+            <Splide options={options}>
+                <Seasons seasons={seasons} />
+            </Splide>
+        </div>
+    )
 }

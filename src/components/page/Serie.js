@@ -51,7 +51,6 @@ const Serie = ({series, loadSeriesData}) => {
                             <div className={'header'}>
                                 <h5>Seasons</h5>
                             </div>
-                            {/*    TODO */}
                             <SeasonsComponent seasons={serie.seasons} />
                         </div>
                         <div className={'authors-and-info'}>

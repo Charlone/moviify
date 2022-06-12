@@ -185,7 +185,7 @@ const Seasons = ({seasons}) => {
                 <SplideSlide key={season.id}>
                     <Card
                         originalTitle={`Season ${season.season_number}`}
-                        posterPath={process.env.REACT_APP_API_POSTER_PATH + season.poster_path}
+                        posterPath={season.poster_path !== null ? process.env.REACT_APP_API_POSTER_PATH + season.poster_path : "/no_image.png"}
                         voteAverage={parseFloat(season.vote_average).toFixed(1)}
                         overview={season.overview || "No information currently available"}
                         href={season.title ? `/movie/${season.id}` : `/serie/${season.id}`}

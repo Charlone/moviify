@@ -50,6 +50,8 @@ function mapStateToProps(state) {
         activeSlug: state.activeSlug,
         viewRequested: state.viewRequested,
         actors: state.actors,
+        movies: state.movies,
+        series: state.series,
     }
 }
 

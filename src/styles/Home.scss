@@ -21,3 +21,10 @@
     }
   }
 }
+
+.splide {
+  .splide__arrow:focus-visible {
+    outline: 3px solid $base-secondary-color;
+    outline-offset: 3px;
+  }
+}

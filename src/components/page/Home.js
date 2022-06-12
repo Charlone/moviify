@@ -64,9 +64,10 @@ Home.propTypes = {
 function mapStateToProps(state) {
     return {
         activeSlug: state.activeSlug,
+        viewRequested: state.viewRequested,
+        actors: state.actors,
         movies: state.movies,
         series: state.series,
-        viewRequested: state.viewRequested,
     }
 }
 

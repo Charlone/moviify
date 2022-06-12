@@ -9,7 +9,7 @@ import '../../styles/Movie.scss';
 import { MenuComponent, MoreVideos, PosterAndVideo, RecommendedComponent, TitleComponent } from "../common/CommonMovieSerieComponents";
 
 const Movie = ({movies, loadMoviesData}) => {
-    const {movie, movieVideos, recommended} = movies
+    const {movie, movieVideos, recommended} = movies;
     let {id} = useParams();
     const [stopLoading, setStopLoading] = useState(false);
     const [ isLoading, setIsLoading ] = useState(true);
@@ -46,8 +46,8 @@ const Movie = ({movies, loadMoviesData}) => {
                     <TitleComponent data={movie} />
                     <MenuComponent data={movie} />
                     <PosterAndVideo data={movie} dataVideos={movieVideos} />
-                    {movieVideos.length && <MoreVideos dataVideos={movieVideos} />}
-                    {recommended.length && <RecommendedComponent dataRecommended={recommended} />}
+                    {movieVideos.length > 0 && <MoreVideos dataVideos={movieVideos} />}
+                    {recommended.length > 0 && <RecommendedComponent dataRecommended={recommended} />}
                 </div>
             }
             <Footer isLoading={isLoading} />

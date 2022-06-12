@@ -2,7 +2,7 @@ import { Genres, MoreVideosSlider, sliderOptions } from "./DataHandle";
 import { getDuration } from "./DataHandle";
 import { dateFormatter } from "./DataHandle";
 import YoutubeEmbed from "./YoutubeEmbed";
-import {Splide, SplideSlide} from "@splidejs/react-splide";
+import { Splide, SplideSlide } from "@splidejs/react-splide";
 import CategorySection from "./CategorySection";
 import Author from "./Author";
 import Card from "./Card";
@@ -32,7 +32,7 @@ export const MenuComponent = ({data}) => {
             <div className={"genre-container"}>
                 <Genres genres={data.genres} />
             </div>
-            {data.seasons ?
+            {data.hasOwnProperty('seasons') ?
                 (
                     <>
                         <div className={'seasons'}>
@@ -97,7 +97,7 @@ export const MenuComponent = ({data}) => {
                         Languages
                     </strong>
                 </h6>
-                <span>{data.spoken_languages.map(language => `${language.name} `) ?? "TBA"}</span>
+                <span>{data.hasOwnProperty('spoken_languages') ? data.spoken_languages.map(language => `${language.name} `) ?? "TBA" : null}</span>
             </div>
         </div>
     )

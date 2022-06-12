@@ -25,6 +25,19 @@
           font-variant: small-caps;
         }
 
+        .button-container {
+          width: inherit;
+          margin: 20px auto;
+
+          .profile-button {
+            font-size: medium;
+            background-color: $header-font-color;
+            color: #FFFFFF;
+            box-shadow: 4px 5px 10px 0 #000;
+            border: 1px solid $blend-color;
+          }
+        }
+
         .actor-image {
           height: auto;
           border: 1px solid $base-secondary-color;
@@ -32,5 +45,20 @@
         }
       }
     }
+
+    .card-img-top {
+      min-height: 339.33px;
+    }
+  }
+}
+
+.splide {
+  .splide__arrow:focus-visible {
+    outline: 3px solid $base-secondary-color;
+  }
+
+  .splide__pagination {
+    position: absolute;
+    bottom: -6px;
   }
 }

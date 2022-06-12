@@ -29,7 +29,7 @@
       }
 
       .genre-container {
-        width: 50%;
+        width: 51%;
         display: flex;
         flex-wrap: wrap;
         flex-direction: row;
@@ -83,15 +83,20 @@
     }
 
     .authors-and-info {
-      margin-bottom: 10px;
-      border-bottom: 1px solid $header-font-color;
-
       .authors-and-info-section {
         display: flex;
         width: max-content;
 
         .author-section, .additional-info {
           padding: 20px 20px 20px 0;
+        }
+
+        .author-section {
+          .author {
+            .author-container:not(.author-container:last-child) {
+              margin-right: 15px;
+            }
+          }
         }
 
         .additional-info {
@@ -101,7 +106,7 @@
 
           ul {
             li::before {
-              content: "\2022"; /* Add content: \2022 is the CSS Code/unicode for a bullet */
+              content: "\2022";
               color: $header-font-color;
               font-weight: bold;
               display: inline-block;
@@ -141,6 +146,7 @@
 
           img {
             height: 100%;
+            min-height: 321.93px;
           }
 
           .card-body {
@@ -175,7 +181,9 @@
     }
 
     .recommendations {
+      padding-top: 10px;
       margin-bottom: 25px;
+      border-top: 1px solid $header-font-color;
 
       .recommendations-header {
         font-variant: small-caps;

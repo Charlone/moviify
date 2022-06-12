@@ -2,6 +2,7 @@ import Card from "./Card";
 import {Splide, SplideSlide} from "@splidejs/react-splide";
 import '@splidejs/react-splide/css';
 import '../../styles/Actors.scss';
+import { truncateText } from "./CommonMovieSerieComponents";
 
 const ActorsBody = ({popularActors}) => {
     const secondarySliderOptions = {
@@ -30,9 +31,9 @@ const ActorsBody = ({popularActors}) => {
                 <SplideSlide key={item.id}>
                     <Card
                         originalTitle={item.title ? item.title : item.name}
-                        posterPath={process.env.REACT_APP_API_POSTER_PATH + item.poster_path}
+                        posterPath={item.poster_path !== null ? process.env.REACT_APP_API_POSTER_PATH + item.poster_path: '/no_image.png'}
                         voteAverage={item.vote_average}
-                        overview={item.overview}
+                        overview={truncateText(item.overview,  65)}
                         href={item.title ? `/movie/${item.id}` : `/serie/${item.id}` }
                     />
                 </SplideSlide>
@@ -48,7 +49,10 @@ const ActorsBody = ({popularActors}) => {
                                 <div className={'actor-header'}>
                                     <h5 className={'actor-name'}>{ranking++}. {actor.name}</h5>
                                 </div>
-                                <img className={"actor-image"} src={process.env.REACT_APP_API_POSTER_PATH + actor.profile_path} />
+                                <img className={"actor-image"} src={actor.profile_path !== null ? process.env.REACT_APP_API_POSTER_PATH + actor.profile_path : '/no_image.png'} />
+                                <div className={'button-container'}>
+                                    <a href={`/actor/${actor.id}`} className={"btn profile-button"}>Profile</a>
+                                </div>
                             </div>
                             <div className={"actor-body col-md-8"}>
                                 <div className={"actor-info"}>

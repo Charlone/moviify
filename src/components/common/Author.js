@@ -6,7 +6,7 @@ const Author = ({createdBy}) => {
             authors.push(
                 <div className={"author-container"} key={author.id}>
                     <div className={"header-container"}>
-                        <div className={"header"}>
+                        <div className={"author-name"}>
                             <h6>
                                 <strong>
                                     {author.name}

@@ -1,5 +1,6 @@
 import Card from "./Card";
-import {Splide, SplideSlide} from "@splidejs/react-splide";
+import { truncateText } from "./CommonMovieSerieComponents";
+import { Splide, SplideSlide } from "@splidejs/react-splide";
 import '@splidejs/react-splide/css';
 
 const CategorySection = ({cards}) => {
@@ -27,10 +28,10 @@ const CategorySection = ({cards}) => {
         cardData.push(
             <SplideSlide key={card.id}>
                 <Card
-                    originalTitle={card.title ? card.title : card.name}
+                    originalTitle={card.title ? truncateText(card.title, 17) : truncateText(card.name, 17)}
                     posterPath={process.env.REACT_APP_API_POSTER_PATH + card.poster_path}
                     voteAverage={parseFloat(card.vote_average).toFixed(1)}
-                    overview={card.overview}
+                    overview={truncateText(card.overview, 43)}
                     href={card.title ? `/movie/${card.id}` : `/serie/${card.id}` }
                 />
             </SplideSlide>

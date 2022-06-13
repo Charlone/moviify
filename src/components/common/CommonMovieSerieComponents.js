@@ -2,7 +2,7 @@ import { Genres, MoreVideosSlider, sliderOptions } from "./DataHandle";
 import { getDuration } from "./DataHandle";
 import { dateFormatter } from "./DataHandle";
 import YoutubeEmbed from "./YoutubeEmbed";
-import {Splide, SplideSlide} from "@splidejs/react-splide";
+import { Splide, SplideSlide } from "@splidejs/react-splide";
 import CategorySection from "./CategorySection";
 import Author from "./Author";
 import Card from "./Card";
@@ -32,7 +32,7 @@ export const MenuComponent = ({data}) => {
             <div className={"genre-container"}>
                 <Genres genres={data.genres} />
             </div>
-            {data.seasons ?
+            {data.hasOwnProperty('seasons') ?
                 (
                     <>
                         <div className={'seasons'}>
@@ -97,7 +97,7 @@ export const MenuComponent = ({data}) => {
                         Languages
                     </strong>
                 </h6>
-                <span>{data.spoken_languages.map(language => `${language.name} `) ?? "TBA"}</span>
+                <span className={"text-uppercase"}>{data.hasOwnProperty('spoken_languages') ? data.spoken_languages.map(language => `${language.iso_639_1} `) ?? "TBA" : null}</span>
             </div>
         </div>
     )
@@ -108,7 +108,7 @@ export const PosterAndVideo = ({data, dataVideos}) => {
         <div className={"movie-body mt-3"}>
             <div className={"movie-info"}>
                 <div className={"poster"}>
-                    <img src={process.env.REACT_APP_API_POSTER_PATH + data.poster_path} alt={data.name ? data.name : data.title}/>
+                    <img width={data.poster_path === null ? '300px' : null} height={data.poster_path === null ? "450px" : null} src={data.poster_path !== null ? process.env.REACT_APP_API_POSTER_PATH + data.poster_path : '/no_image.png'} alt={data.name ? data.name : data.title}/>
                 </div>
                 <div className={"overview"}>
                     {
@@ -143,7 +143,9 @@ export const AuthorComponent = ({data}) => {
                     {data.created_by.length > 1 ? "Authors" : "Author"}
                 </strong>
             </h5>
-            <Author createdBy={data.created_by} />
+            <div className={'author d-flex'}>
+                <Author createdBy={data.created_by} />
+            </div>
         </div>
     )
 }
@@ -166,12 +168,12 @@ export const AdditionalInformationComponent = ({data}) => {
                 </strong>
             </h5>
             <ul>
-                <li>First Air date: {dateFormatter(data.first_air_date)}</li>
-                <li>Episode duration: approx {getDuration(data.episode_run_time[0])}</li>
-                <li>Last Air date: {dateFormatter(data.last_air_date)}</li>
-                <li>Last episode to air: {data.last_episode_to_air.name}</li>
-                <li>Last episode duration: {getDuration(data.last_episode_to_air.runtime)}</li>
-                <li>Rating last episode: {parseFloat(data.last_episode_to_air.vote_average).toFixed(1)}</li>
+                {typeof data.first_air_date !== 'undefined' ? <li>First Air date: {dateFormatter(data.first_air_date)}</li> : null}
+                {typeof data.episode_run_time !== 'undefined' ? <li>Episode duration: approx {getDuration(data.episode_run_time[0])}</li> : null}
+                {typeof data.last_air_date !== 'undefined' ? <li>Last Air date: {dateFormatter(data.last_air_date)}</li> : null}
+                {typeof data.last_episode_to_air !== 'undefined' ? <li>Last episode to air: {data.last_episode_to_air.name}</li> : null}
+                {typeof data.last_episode_to_air !== 'undefined' ? <li>Last episode duration: {getDuration(data.last_episode_to_air.runtime)}</li> : null}
+                {typeof data.last_episode_to_air !== 'undefined' ? <li>Rating last episode: {parseFloat(data.last_episode_to_air.vote_average).toFixed(1)}</li> : null}
             </ul>
         </div>
     );
@@ -179,21 +181,24 @@ export const AdditionalInformationComponent = ({data}) => {
 
 const Seasons = ({seasons}) => {
     let seasonsToShow = [];
-    seasons.forEach(season => {
-        if (season.season_number !== 0) {
-            seasonsToShow.push(
-                <SplideSlide key={season.id}>
-                    <Card
-                        originalTitle={`Season ${season.season_number}`}
-                        posterPath={process.env.REACT_APP_API_POSTER_PATH + season.poster_path}
-                        voteAverage={parseFloat(season.vote_average).toFixed(1)}
-                        overview={season.overview || "No information currently available"}
-                        href={season.title ? `/movie/${season.id}` : `/serie/${season.id}`}
-                    />
-                </SplideSlide>
-            )
-        }
-    });
+
+    if (typeof seasons !== 'undefined') {
+        seasons.forEach(season => {
+            if (season.season_number !== 0) {
+                seasonsToShow.push(
+                    <SplideSlide key={season.id}>
+                        <Card
+                            originalTitle={`Season ${season.season_number}`}
+                            posterPath={season.poster_path !== null ? process.env.REACT_APP_API_POSTER_PATH + season.poster_path : "/no_image.png"}
+                            voteAverage={parseFloat(season.vote_average).toFixed(1)}
+                            overview={season.overview || "No information currently available"}
+                            href={season.title ? `/movie/${season.id}` : `/serie/${season.id}`}
+                        />
+                    </SplideSlide>
+                )
+            }
+        });
+    }
 
     return seasonsToShow;
 }

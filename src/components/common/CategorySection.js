@@ -29,9 +29,9 @@ const CategorySection = ({cards}) => {
             <SplideSlide key={card.id}>
                 <Card
                     originalTitle={card.title ? truncateText(card.title, 17) : truncateText(card.name, 17)}
-                    posterPath={process.env.REACT_APP_API_POSTER_PATH + card.poster_path}
+                    posterPath={card.poster_path !== null ? process.env.REACT_APP_API_POSTER_PATH + card.poster_path : "/no_image.png"}
                     voteAverage={parseFloat(card.vote_average).toFixed(1)}
-                    overview={truncateText(card.overview, 43)}
+                    overview={card.overview !== ' ' ? truncateText(card.overview, 43) : "No information currently available"}
                     href={card.title ? `/movie/${card.id}` : `/serie/${card.id}` }
                 />
             </SplideSlide>

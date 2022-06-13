@@ -59,14 +59,16 @@ Home.propTypes = {
     movies: PropTypes.object.isRequired,
     loadMoviesData: PropTypes.func.isRequired,
     loadSeriesData: PropTypes.func.isRequired,
+    loadActorsData: PropTypes.func.isRequired,
 }
 
 function mapStateToProps(state) {
     return {
         activeSlug: state.activeSlug,
+        viewRequested: state.viewRequested,
+        actors: state.actors,
         movies: state.movies,
         series: state.series,
-        viewRequested: state.viewRequested,
     }
 }
 

@@ -55,7 +55,7 @@ const Serie = ({series, loadSeriesData}) => {
                         </div>
                         <div className={'authors-and-info'}>
                             <div className={'authors-and-info-section'}>
-                                {serie.created_by.length > 0 && <AuthorComponent data={serie} />}
+                                {serie.hasOwnProperty('created_by') && serie.created_by.length > 0 && <AuthorComponent data={serie} />}
                                 <AdditionalInformationComponent data={serie} />
                             </div>
                         </div>

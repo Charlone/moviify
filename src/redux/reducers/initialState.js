@@ -9,7 +9,6 @@ const initialState = {
         upcoming: [],
         recommended: [],
         movie: [],
-        movieImages: [],
         movieVideos: [],
     },
     series: {
@@ -17,7 +16,6 @@ const initialState = {
         topSeries: [],
         onTheAir: [],
         airingToday: [],
-        similar: [],
         serie: [],
         seriesRecommended: [],
         serieVideos: [],
@@ -26,6 +24,7 @@ const initialState = {
         popularActors: [],
         actor: [],
         actorImages: [],
+        trending: [],
     },
     headers: {
         movies: [

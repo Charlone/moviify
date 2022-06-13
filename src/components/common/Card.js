@@ -3,7 +3,7 @@ import "../../styles/Card.scss";
 const Card = ({originalTitle, posterPath, voteAverage, overview, href}) => {
     return (
         <div className="card text-black">
-            <img src={posterPath} className="card-img-top" alt="poster" />
+            <img src={posterPath} className="card-img-top img-fluid" alt="poster" />
             <div className="card-body">
                 <h5 title={originalTitle} className="card-title">{originalTitle}</h5>
                 <p className={"rating mb-1"}>

@@ -1,10 +1,11 @@
-import '../styles/App.scss';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Nav from "./common/Nav";
 import Home from "./page/Home";
 import Actors from "./page/Actors";
 import Movie from "./page/Movie";
 import Serie from "./page/Serie";
+import Actor from "./page/Actor";
+import '../styles/App.scss';
 
 function App() {
   return (
@@ -15,7 +16,7 @@ function App() {
       <Route path="/movie/:id" element={<Movie />} />
       <Route path="/serie/:id" element={<Serie />} />
       <Route path="/actors" element={<Actors />} />
-      <Route path="/actor/:id" />
+      <Route path="/actor/:id" element={<Actor />} />
     </Routes>
   </BrowserRouter>
   );

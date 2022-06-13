@@ -59,6 +59,7 @@ Home.propTypes = {
     movies: PropTypes.object.isRequired,
     loadMoviesData: PropTypes.func.isRequired,
     loadSeriesData: PropTypes.func.isRequired,
+    loadActorsData: PropTypes.func.isRequired,
 }
 
 function mapStateToProps(state) {

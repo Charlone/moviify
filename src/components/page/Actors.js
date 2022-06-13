@@ -8,8 +8,8 @@ import ActorsSection from "../common/ActorsSection";
 import Spinner from "../common/Spinner";
 import Footer from "../common/Footer";
 
-const Actors = ({activeSlug, viewRequested, actors, loadActorsData}) => {
-    const { popularActors, actor, actorImage } = actors;
+const Actors = ({actors, loadActorsData}) => {
+    const { popularActors } = actors;
     const [ isLoading, setIsLoading ] = useState(true);
 
     useEffect(() => {
@@ -19,7 +19,7 @@ const Actors = ({activeSlug, viewRequested, actors, loadActorsData}) => {
             }
             setIsLoading(false)
         };
-    }, [popularActors]);
+    }, [popularActors, loadActorsData]);
 
 
     return (
@@ -40,8 +40,7 @@ const Actors = ({activeSlug, viewRequested, actors, loadActorsData}) => {
 }
 
 Actors.propTypes = {
-    activeSlug: PropTypes.string.isRequired,
-    viewRequested: PropTypes.string.isRequired,
+    loadActorsData: PropTypes.func.isRequired,
     actors: PropTypes.object.isRequired,
 }
 

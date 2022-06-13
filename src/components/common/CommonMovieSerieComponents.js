@@ -97,7 +97,7 @@ export const MenuComponent = ({data}) => {
                         Languages
                     </strong>
                 </h6>
-                <span>{data.hasOwnProperty('spoken_languages') ? data.spoken_languages.map(language => `${language.name} `) ?? "TBA" : null}</span>
+                <span className={"text-uppercase"}>{data.hasOwnProperty('spoken_languages') ? data.spoken_languages.map(language => `${language.iso_639_1} `) ?? "TBA" : null}</span>
             </div>
         </div>
     )

@@ -1,0 +1,106 @@
+@import "utils/variables";
+
+.actor-section-container {
+  color: $font-color;
+  padding: 1rem;
+
+  .actor-name-container {
+    margin-bottom: 5px;
+
+    .header {
+      margin: 0;
+      font-variant: small-caps;
+    }
+
+    .timeline {
+      font-size: small;
+    }
+  }
+
+  .actor-section-body {
+    border: 1px solid $base-secondary-color;
+    background-color: #FFFFFF;
+    color: #000;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+
+    .bio {
+      .bio-header {
+        font-variant: small-caps;
+      }
+
+      img {
+        float: left;
+        margin: 0 1rem 0 0;
+        width: 200px
+      }
+
+      .bio-text {
+        text-align: justify;
+        margin: 0;
+      }
+    }
+
+    .more-photos {
+      margin: 20px 0;
+
+      img {
+        width: 100%;
+        border: 1px solid $base-secondary-color;
+        box-shadow: 1px 1px 5px 0 $blend-color;
+      }
+    }
+  }
+}
+
+.trending {
+  color: $font-color;
+  padding-top: 1rem;
+  border-top: 1px solid $base-secondary-color;
+
+  .header {
+    font-variant: small-caps;
+    color: $header-font-color;
+  }
+
+  .actor-name-container {
+    width: 100%;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: rgba(0,0,0, 0.5);
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  img {
+    width: 100%;
+    border: 1px solid $base-secondary-color;
+    box-shadow: 1px 1px 5px 0 $blend-color;
+  }
+
+  .profile-button {
+    font-size: medium;
+    background-color: $header-font-color;
+    color: #FFFFFF;
+    box-shadow: 4px 5px 10px 0 #000;
+    border: 1px solid $blend-color;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 75px;
+  }
+}
+
+.splide {
+  .splide__arrow:focus-visible {
+    outline: 3px solid $base-secondary-color;
+    outline-offset: 3px;
+  }
+}

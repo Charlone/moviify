@@ -11,7 +11,8 @@ export const getActors = async (type, actorId = null) => {
     switch (type) {
         case "popularActors": path = '/person/popular'; break;
         case "actor": path = `/person/${actorId}`; break;
-        case "images": path = `/person/${actorId}/images`; break;
+        case "actorImages": path = `/person/${actorId}/images`; break;
+        case "trending": path = `/trending/person/week`; break;
         default: return handleError("No registered endpoint for specified type - " + type);
     }
 

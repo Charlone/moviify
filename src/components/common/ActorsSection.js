@@ -49,7 +49,7 @@ const ActorsBody = ({popularActors}) => {
                                 <div className={'actor-header'}>
                                     <h5 className={'actor-name'}>{ranking++}. {actor.name}</h5>
                                 </div>
-                                <img className={"actor-image"} src={actor.profile_path !== null ? process.env.REACT_APP_API_POSTER_PATH + actor.profile_path : '/no_image.png'} />
+                                <img className={"actor-image"} src={actor.profile_path !== null ? process.env.REACT_APP_API_POSTER_PATH + actor.profile_path : '/no_image.png'} alt={actor.name} />
                                 <div className={'button-container'}>
                                     <a href={`/actor/${actor.id}`} className={"btn profile-button"}>Profile</a>
                                 </div>

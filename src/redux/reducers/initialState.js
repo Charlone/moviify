@@ -26,6 +26,11 @@ const initialState = {
         actorImages: [],
         trending: [],
     },
+    search: {
+        movie: [],
+        series: [],
+        actor: [],
+    },
     headers: {
         movies: [
             {

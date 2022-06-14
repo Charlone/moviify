@@ -9,17 +9,17 @@ import '../styles/App.scss';
 
 function App() {
   return (
-  <BrowserRouter>
-    <Nav />
-    <Routes>
-      <Route exact path="/" element={<Home />} />
-      <Route path="/movie/:id" element={<Movie />} />
-      <Route path="/serie/:id" element={<Serie />} />
-      <Route path="/actors" element={<Actors />} />
-      <Route path="/actor/:id" element={<Actor />} />
-      <Route path="/search/results" />
-    </Routes>
-  </BrowserRouter>
+    <BrowserRouter>
+      <Nav />
+      <Routes>
+        <Route exact path="/" element={<Home />} />
+        <Route path="/movie/:id" element={<Movie />} />
+        <Route path="/serie/:id" element={<Serie />} />
+        <Route path="/actors" element={<Actors />} />
+        <Route path="/actor/:id" element={<Actor />} />
+        <Route path="/search/results" />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

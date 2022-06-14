@@ -1,5 +1,4 @@
 import "../../styles/Footer.scss";
-import {useEffect} from "react";
 
 const Footer = ({isLoading}) => {
     return (

@@ -13,7 +13,6 @@ export const getMovies = async (type, movieId = null) => {
         case "popularMovies": path = '/movie/popular'; break;
         case "topMovies": path = '/movie/top_rated'; break;
         case "upcoming": path = '/movie/upcoming'; break;
-        case "genre": path = '/genre/movie/list'; break;
         case "recommended": path = `/movie/${movieId}/recommendations`; break;
         case "movie": path = `/movie/${movieId}`; break;
         case "movieVideos": path = `/movie/${movieId}/videos`; break;

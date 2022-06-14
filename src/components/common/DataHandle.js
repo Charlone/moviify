@@ -95,7 +95,7 @@ export const MoreVideosSlider = ({moreVideos}) => {
     });
 
     if (videosArray.length > 5) {
-        return videosArray.slice(1, 6);
+        return videosArray.slice(1, 8);
     }
 
     return videosArray;

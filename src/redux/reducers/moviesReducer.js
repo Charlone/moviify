@@ -11,8 +11,6 @@ export default function moviesReducer(state = initialState.movies, action) {
             return Object.assign({}, state, {topMovies: action.topMovies.results});
         case types.GET_UPCOMING_MOVIES_SUCCESS:
             return Object.assign({}, state, {upcoming: action.upcomingMovies.results});
-        case types.GET_MOVIES_GENRE_SUCCESS:
-            return Object.assign({}, state, {genre: action.moviesGenre.results});
         case types.GET_RECOMMENDED_MOVIES_SUCCESS:
             return Object.assign({}, state, {recommended: action.recommendedMovies.results});
         case types.GET_MOVIE_SUCCESS:

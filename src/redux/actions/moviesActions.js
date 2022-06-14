@@ -22,10 +22,6 @@ export function loadRecommendedMoviesSuccess(recommendedMovies) {
     return { type: types.GET_RECOMMENDED_MOVIES_SUCCESS, recommendedMovies }
 }
 
-export function loadMoviesGenreSuccess(moviesGenre) {
-    return { type: types.GET_MOVIES_GENRE_SUCCESS, moviesGenre }
-}
-
 export function loadMovieSuccess(movie) {
     return { type: types.GET_MOVIE_SUCCESS, movie }
 }
@@ -45,7 +41,6 @@ export function loadMoviesData(type, movieId = null) {
                     case "popularMovies": return dispatch(loadPopularMoviesSuccess(movieData));
                     case "topMovies": dispatch(loadTopMoviesSuccess(movieData)); break;
                     case "upcoming": dispatch(loadUpcomingMoviesSuccess(movieData)); break;
-                    case "genre": dispatch(loadMoviesGenreSuccess(movieData)); break;
                     case "recommended": dispatch(loadRecommendedMoviesSuccess(movieData, movieId)); break;
                     case "movie": dispatch(loadMovieSuccess(movieData, movieId)); break;
                     case "movieVideos": dispatch(loadMovieVideosSuccess(movieData, movieId)); break;

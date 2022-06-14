@@ -20,4 +20,3 @@ export const getActors = async (type, actorId = null) => {
         .then(handleResponse)
         .catch(handleError);
 }
-

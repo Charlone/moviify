@@ -1,5 +1,5 @@
 import Card from "./Card";
-import {Splide, SplideSlide} from "@splidejs/react-splide";
+import { Splide, SplideSlide } from "@splidejs/react-splide";
 import '@splidejs/react-splide/css';
 import '../../styles/Actors.scss';
 import { truncateText } from "./CommonMovieSerieComponents";

@@ -32,8 +32,8 @@ export const MenuComponent = ({data}) => {
             <div className={"genre-container"}>
                 <Genres genres={data.genres} />
             </div>
-            {data.hasOwnProperty('seasons') ?
-                (
+            {data.hasOwnProperty('seasons')
+                ? (
                     <>
                         <div className={'seasons'}>
                             <h6 className={"heading"}>
@@ -61,8 +61,7 @@ export const MenuComponent = ({data}) => {
                         </div>
                     </>
                 )
-                :
-                (
+                : (
                     <>
                         <div className={'release'}>
                             <h6 className={"heading"}>

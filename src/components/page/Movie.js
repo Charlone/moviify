@@ -1,12 +1,12 @@
 import { connect } from "react-redux";
 import { useParams } from "react-router-dom";
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { loadMoviesData } from "../../redux/actions/moviesActions";
+import { MenuComponent, MoreVideos, PosterAndVideo, RecommendedComponent, TitleComponent } from "../common/CommonMovieSerieComponents";
 import Spinner from "../common/Spinner";
 import Footer from "../common/Footer";
 import '../../styles/Movie.scss';
-import { MenuComponent, MoreVideos, PosterAndVideo, RecommendedComponent, TitleComponent } from "../common/CommonMovieSerieComponents";
 
 const Movie = ({movies, loadMoviesData}) => {
     const {movie, movieVideos, recommended} = movies;

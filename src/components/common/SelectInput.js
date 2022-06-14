@@ -1,9 +1,8 @@
-import React, { Component } from 'react'
 import Select from 'react-select'
 
 const options = [
     { value: 'movies', label: 'Movies', image: '/movie.svg' },
-    { value: 'series', label: 'Series', image: 'monitor.svg' },
+    { value: 'series', label: 'Series', image: '/monitor.svg' },
     { value: 'actors', label: 'Actors', image: '/actors.svg' }
 ];
 

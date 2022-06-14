@@ -18,14 +18,6 @@ export function loadAiringTodaySeriesSuccess(airingTodaySeries) {
     return { type: types.GET_AIRING_TODAY_SERIES_SUCCESS, airingTodaySeries }
 }
 
-export function loadRecommendedSeriesSuccess(recommendedSeries) {
-    return { type: types.GET_RECOMMENDED_SERIES_SUCCESS, recommendedSeries }
-}
-
-export function loadSimilarSeriesSuccess(similarSeries) {
-    return { type: types.GET_SIMILAR_SERIES_SUCCESS, similarSeries }
-}
-
 export function loadSerieSuccess(serie) {
     return { type: types.GET_SERIE_SUCCESS, serie }
 }
@@ -49,8 +41,6 @@ export function loadSeriesData(type, serieId = null) {
                     case "popularSeries": return dispatch(loadPopularSeriesSuccess(serieData));
                     case "topSeries": dispatch(loadTopSeriesSuccess(serieData)); break;
                     case "onTheAir": dispatch(loadOnTheAirSeriesSuccess(serieData)); break;
-                    case "recommended": dispatch(loadRecommendedSeriesSuccess(serieData)); break;
-                    case "similar": dispatch(loadSimilarSeriesSuccess(serieData)); break;
                     case "serie": dispatch(loadSerieSuccess(serieData, serieId)); break;
                     case "seriesRecommended": dispatch(loadSeriesRecommendedSuccess(serieData, serieId)); break;
                     case "serieVideos": dispatch(loadSerieVideosSuccess(serieData, serieId)); break;

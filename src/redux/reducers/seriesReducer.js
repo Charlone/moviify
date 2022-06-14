@@ -11,10 +11,6 @@ export default function seriesReducer(state = initialState.series, action) {
             return Object.assign({}, state, {topSeries: action.topSeries.results});
         case types.GET_AIRING_TODAY_SERIES_SUCCESS:
             return Object.assign({}, state, {airingToday: action.airingTodaySeries.results});
-        case types.GET_RECOMMENDED_SERIES_SUCCESS:
-            return Object.assign({}, state, {recommended: action.recommendedSeries.results});
-        case types.GET_SIMILAR_SERIES_SUCCESS:
-            return Object.assign({}, state, {similar: action.similarSeries.results});
         case types.GET_SERIE_SUCCESS:
             return Object.assign({}, state, {serie: action.serie});
         case types.GET_SERIES_RECOMMENDED_SUCCESS:

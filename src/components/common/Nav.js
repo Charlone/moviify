@@ -1,7 +1,7 @@
-import { NavLink, useLocation } from "react-router-dom";
 import initialState from "../../redux/reducers/initialState";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import { NavLink, useLocation } from "react-router-dom";
 import { loadActiveSlug } from "../../redux/actions/activeSlugActions";
 import { loadViewRequested } from "../../redux/actions/viewRequestedActions";
 import SelectInput from "./SelectInput";
@@ -11,17 +11,17 @@ const Nav = ({activeSlug, viewRequested, loadViewRequested, loadActiveSlug}) => 
         e.preventDefault();
         const view = e.target.dataset.slug;
 
-        switch (e.target.dataset.slug) {
+        switch (view) {
             case 'actors': break;
             case 'home': loadViewRequested(viewRequested); break;
             case 'movies':
             case 'series':
-                loadViewRequested(e.target.dataset.slug);
+                loadViewRequested(view);
                 view === 'series'
                     ? loadActiveSlug('popularSeries')
                     : loadActiveSlug('popularMovies');
             break;
-            default: loadActiveSlug(e.target.dataset.slug); break;
+            default: loadActiveSlug(view); break;
         }
     }
 
@@ -119,6 +119,8 @@ const Nav = ({activeSlug, viewRequested, loadViewRequested, loadActiveSlug}) => 
 Nav.propTypes = {
     activeSlug: PropTypes.string.isRequired,
     viewRequested: PropTypes.string.isRequired,
+    loadViewRequested: PropTypes.func.isRequired,
+    loadActiveSlug: PropTypes.func.isRequired,
 }
 
 function mapStateToProps(state) {

@@ -28,7 +28,7 @@ const initialState = {
     },
     search: {
         movie: [],
-        series: [],
+        serie: [],
         actor: [],
     },
     headers: {

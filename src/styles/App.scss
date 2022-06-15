@@ -88,11 +88,12 @@ body {
       .css-b62m3t-container {
         width: 75%;
         vertical-align: middle;
+        z-index: 10;
       }
 
       .search-input {
         color: $header-font-color;
-        padding-right: 2.5rem;
+        padding-right: 3.5rem;
         width: 100%;
         margin: 0;
       }
@@ -101,6 +102,48 @@ body {
         color: $header-font-color;
         position: absolute;
         right: 0;
+      }
+    }
+  }
+}
+
+.search-results {
+  position: absolute;
+  list-style: none;
+  z-index: 1;
+  max-height: 400px;
+  margin: 37px 0 0 0;
+  padding: 0;
+  border: 1px solid $border-color;
+  overflow-y: scroll;
+
+  li {
+    //height: 140.33px;
+    //width: auto;
+    width: inherit;
+    background-color: $base-color;
+    border-bottom: 1px solid $border-color;
+    padding: 1rem;
+    position: relative;
+
+    a {
+      color: $font-color;
+      text-decoration: none;
+      font-weight: bolder;
+
+      div {
+        display: flex;
+        align-items: center;
+        width: 100%;
+
+        img {
+          width: 100px;
+          border: 1px solid $border-color;
+        }
+
+        p {
+          margin-left: 1rem;
+        }
       }
     }
   }

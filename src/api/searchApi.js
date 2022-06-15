@@ -10,7 +10,7 @@ export const getSearchResults = async (type, query) => {
 
     switch (type) {
         case "movie": path = '/search/movie'; break;
-        case "series": path = '/search/tv'; break;
+        case "serie": path = '/search/tv'; break;
         case "actor": path = '/search/person'; break;
         default: return handleError("No registered endpoint for specified type - " + type);
     }

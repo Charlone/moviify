@@ -6,7 +6,7 @@ export default function actorsReducer(state = initialState.search, action) {
         case types.GET_SEARCH_RESULTS_MOVIE:
             return Object.assign({}, state, {movie: action.movie.results});
         case types.GET_SEARCH_RESULTS_SERIES:
-            return Object.assign({}, state, {series: action.series.results});
+            return Object.assign({}, state, {serie: action.serie.results});
         case types.GET_SEARCH_RESULTS_ACTOR:
             return Object.assign({}, state, {actor: action.actor.results});
         default:

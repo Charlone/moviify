@@ -4,13 +4,12 @@ import PropTypes from "prop-types";
 import { NavLink, useLocation } from "react-router-dom";
 import { loadActiveSlug } from "../../redux/actions/activeSlugActions";
 import { loadViewRequested } from "../../redux/actions/viewRequestedActions";
-import { loadSearchData } from "../../redux/actions/searchActions";
 import SelectInput from "./SelectInput";
 import { getSearchResults } from "../../api/searchApi";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const Nav = ({activeSlug, viewRequested, search, loadViewRequested, loadActiveSlug, loadSearchData}) => {
+const Nav = ({activeSlug, viewRequested, loadViewRequested, loadActiveSlug}) => {
     let category,
         trigger = false;
 
@@ -94,14 +93,14 @@ const Nav = ({activeSlug, viewRequested, search, loadViewRequested, loadActiveSl
         }
     }
 
-    const handleBlur = (e) => {
+    const handleBlur = () => {
         let searchElement = document.querySelector('.search-results');
         setTimeout(() => {
             searchElement.style.display = 'none';
         }, 500);
     }
 
-    const handleFocus = (e) => {
+    const handleFocus = () => {
         let searchElement = document.querySelector('.search-results');
         searchElement.style.display = 'block';
     }
@@ -210,7 +209,6 @@ const Nav = ({activeSlug, viewRequested, search, loadViewRequested, loadActiveSl
                     <ul className={"navbar-nav me-auto mb-2 mb-lg-0"}>
                         <Headers />
                     </ul>
-
                     <SearchComponent />
                 </div>
             </nav>
@@ -223,22 +221,18 @@ Nav.propTypes = {
     viewRequested: PropTypes.string.isRequired,
     loadViewRequested: PropTypes.func.isRequired,
     loadActiveSlug: PropTypes.func.isRequired,
-    search: PropTypes.object.isRequired,
-    loadSearchData: PropTypes.func.isRequired,
 }
 
 function mapStateToProps(state) {
     return {
         activeSlug: state.activeSlug,
         viewRequested: state.viewRequested,
-        search: state.search,
     }
 }
 
 const mapDispatchToProps = {
     loadActiveSlug,
     loadViewRequested,
-    loadSearchData,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Nav);

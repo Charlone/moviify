@@ -6,8 +6,8 @@ export function loadSearchMovie(movie) {
     return { type: types.GET_SEARCH_RESULTS_MOVIE, movie }
 }
 
-export function loadSearchSeries(series) {
-    return { type: types.GET_SEARCH_RESULTS_SERIES, series }
+export function loadSearchSeries(serie) {
+    return { type: types.GET_SEARCH_RESULTS_SERIES, serie }
 }
 export function loadSearchActor(actor) {
     return { type: types.GET_SEARCH_RESULTS_ACTOR, actor }

@@ -4,15 +4,15 @@ import PropTypes from "prop-types";
 import { NavLink, useLocation } from "react-router-dom";
 import { loadActiveSlug } from "../../redux/actions/activeSlugActions";
 import { loadViewRequested } from "../../redux/actions/viewRequestedActions";
-import { loadSearchData } from "../../redux/actions/searchActions";
 import SelectInput from "./SelectInput";
 import { getSearchResults } from "../../api/searchApi";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const Nav = ({activeSlug, viewRequested, search, loadViewRequested, loadActiveSlug, loadSearchData}) => {
-    const {movie, series, actor} = search;
-    let category;
+const Nav = ({activeSlug, viewRequested, loadViewRequested, loadActiveSlug}) => {
+    let category,
+        trigger = false;
+
     const handleClick = (e) => {
         e.preventDefault();
         const view = e.target.dataset.slug;
@@ -36,23 +36,75 @@ const Nav = ({activeSlug, viewRequested, search, loadViewRequested, loadActiveSl
     }
 
     const handleKeyUp = async (e) => {
-        let searchString = e.target.value;
-        if (typeof category === 'undefined') {
-            toast.error('Please select a category to search!', {
-                position: "top-right",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-            });
-        } else if (searchString.length >= 3) {
-            let results = await getSearchResults(category, searchString);
+        let searchString = e.target.value,
+            searchElement = document.querySelector('.search-results'),
+            element;
 
-            console.log(results)
+        if (typeof category === 'undefined') {
+            if (trigger === false) {
+                trigger = true;
+
+                toast.error('Please select a category to search!', {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                });
+
+                setTimeout(() => {
+                    trigger = false;
+                }, 5500);
+            }
+        } else if (searchString.length >= 3) {
+            let searchResults = await getSearchResults(category, searchString);
+
+            searchElement.innerHTML = "";
+
+            if (Object.keys(searchResults.results).length !== 0) {
+                searchResults.results.forEach(result => {
+                    element =
+                        `<li className="search-result">
+                         <a href="/${category}/${result.id}">
+                             <div>
+                                 <img class="result-image" src="${category === 'actor' ? (result.profile_path !== null ? process.env.REACT_APP_API_AUTHOR_PATH + result.profile_path : "/no_image.png") : (result.poster_path !== null ? process.env.REACT_APP_API_POSTER_PATH + result.poster_path : "/no_image.png")}" />
+                                 <p>${result.title ? result.title : result.name}</p>
+                             </div>
+                         </a>
+                     </li>`;
+
+                    searchElement.innerHTML += element;
+                });
+            } else {
+                element =
+                    `<li className="search-result">
+                         <a href="#">
+                             <div>
+                                 <img class="result-image" src="/no_image.png" />
+                                 <p>No ${category}s have been found</p>
+                             </div>
+                         </a>
+                     </li>`;
+
+                searchElement.innerHTML = element;
+            }
         }
     }
+
+    const handleBlur = () => {
+        let searchElement = document.querySelector('.search-results');
+        setTimeout(() => {
+            searchElement.style.display = 'none';
+        }, 500);
+    }
+
+    const handleFocus = () => {
+        let searchElement = document.querySelector('.search-results');
+        searchElement.style.display = 'block';
+    }
+
 
     const Headers = () => {
         const location = useLocation();
@@ -113,7 +165,7 @@ const Nav = ({activeSlug, viewRequested, search, loadViewRequested, loadActiveSl
         return (
             <form className="d-flex search-container">
                 <SelectInput name={"search-category"} onChange={handleChange} />
-                <input className="form-control search-input" type="search" placeholder="Search" aria-label="Search" onKeyUp={handleKeyUp} />
+                <input className="form-control search-input" type="search" placeholder="Search" aria-label="Search" onKeyUp={handleKeyUp} onBlur={handleBlur} onFocus={handleFocus} />
                 <button className={"btn search-button"} type="submit">
                     <svg fill="#E71" width={"25px"} height={"25px"} version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 53.627 53.627" style={{enableBackground:"new 0 0 53.627 53.627"}}>
                         <path d="M53.627,49.385L37.795,33.553C40.423,30.046,42,25.709,42,21C42,9.42,32.58,0,21,0S0,9.42,0,21s9.42,21,21,21
@@ -121,6 +173,9 @@ const Nav = ({activeSlug, viewRequested, search, loadViewRequested, loadActiveSl
                                 S2,31.477,2,21z"/><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g>
                     </svg>
                 </button>
+                <ul className={"search-results"}>
+
+                </ul>
                 <ToastContainer
                     position="top-right"
                     autoClose={5000}
@@ -154,7 +209,6 @@ const Nav = ({activeSlug, viewRequested, search, loadViewRequested, loadActiveSl
                     <ul className={"navbar-nav me-auto mb-2 mb-lg-0"}>
                         <Headers />
                     </ul>
-
                     <SearchComponent />
                 </div>
             </nav>
@@ -167,22 +221,18 @@ Nav.propTypes = {
     viewRequested: PropTypes.string.isRequired,
     loadViewRequested: PropTypes.func.isRequired,
     loadActiveSlug: PropTypes.func.isRequired,
-    search: PropTypes.object.isRequired,
-    loadSearchData: PropTypes.func.isRequired,
 }
 
 function mapStateToProps(state) {
     return {
         activeSlug: state.activeSlug,
         viewRequested: state.viewRequested,
-        search: state.search,
     }
 }
 
 const mapDispatchToProps = {
     loadActiveSlug,
     loadViewRequested,
-    loadSearchData,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Nav);

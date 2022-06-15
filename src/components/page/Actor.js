@@ -118,18 +118,21 @@ const Actor = ({actors, loadActorsData}) => {
                                         Biography
                                     </strong>
                                 </h6>
-                                <p className={"bio-text"}>{actor.biography}</p>
+                                <p className={"bio-text"}>{actor.biography.length > 0 ? actor.biography : "Currently no information regarding this actor. Please check back later."}</p>
                             </div>
-                            <div className={"more-photos"}>
-                                <h5 className={"header"}>
-                                    <strong>
-                                        Gallery
-                                    </strong>
-                                </h5>
-                                <Splide options={sliderOptions}>
-                                    <MoreImages actorImages={actorImages} />
-                                </Splide>
-                            </div>
+                            {actorImages.length > 1 &&
+                                (
+                                    <div className={"more-photos"}>
+                                        <h5 className={"header"}>
+                                            <strong>
+                                                Gallery
+                                            </strong>
+                                        </h5>
+                                        <Splide options={sliderOptions}>
+                                            <MoreImages actorImages={actorImages} />
+                                        </Splide>
+                                    </div>
+                                )}
                         </div>
                     </div>
                     <div className={"trending"}>

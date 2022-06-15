@@ -2,8 +2,8 @@ import Select from 'react-select'
 
 const options = [
     { value: 'movie', label: 'Movies', image: '/movie.svg' },
-    { value: 'series', label: 'Series', image: '/monitor.svg' },
-    { value: 'actors', label: 'Actors', image: '/actors.svg' }
+    { value: 'serie', label: 'Series', image: '/monitor.svg' },
+    { value: 'actor', label: 'Actors', image: '/actors.svg' }
 ];
 
 const SelectInput = ({name, onChange}) => {

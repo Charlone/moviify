@@ -17,7 +17,6 @@ function App() {
         <Route path="/serie/:id" element={<Serie />} />
         <Route path="/actors" element={<Actors />} />
         <Route path="/actor/:id" element={<Actor />} />
-        <Route path="/search/results" />
       </Routes>
     </BrowserRouter>
   );

@@ -29,7 +29,7 @@ const Home = ({activeSlug, movies, series, loadMoviesData, loadSeriesData, loadA
     }, [loadMoviesData, loadSeriesData, loadActorsData]);
 
     return (
-        <div className={"home"}>
+        <main className={"home"}>
             {isLoading && <Preloader />}
             <div className={"container mt-1 home-container"}>
                 <section className={"section text-white  m-0 p-0"}>
@@ -49,7 +49,7 @@ const Home = ({activeSlug, movies, series, loadMoviesData, loadSeriesData, loadA
                 </section>
             </div>
             <Footer isLoading={isLoading}/>
-        </div>
+        </main>
     );
 }
 

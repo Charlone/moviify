@@ -23,8 +23,8 @@ const Actors = ({actors, loadActorsData}) => {
 
 
     return (
-        <div className={'actors-container'}>
-            <div className={"container"}>
+        <main className={'actors-container'}>
+            <section className={"container"}>
                 <h4 className={"subheading text-white mt-4"}>Most Popular</h4>
                 {!popularActors.length && <Spinner />}
                 {
@@ -33,9 +33,9 @@ const Actors = ({actors, loadActorsData}) => {
                         <ActorsSection popularActors={popularActors} />
                     </section>
                 }
-            </div>
+            </section>
             <Footer isLoading={isLoading} />
-        </div>
+        </main>
     );
 }
 

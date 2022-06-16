@@ -39,31 +39,31 @@ const Serie = ({series, loadSeriesData}) => {
     }, [stopLoading]);
 
     return (
-        <div className={'movie-page-container'}>
+        <main className={'movie-page-container'}>
             {
                 serie.length === 0 && serieVideos.length === 0 ? <Spinner /> :
-                    <div className={"container movie-container"}>
+                    <section className={"container movie-container"}>
                         <TitleComponent data={serie} />
                         <MenuComponent data={serie} />
                         <PosterAndVideo data={serie} dataVideos={serieVideos} />
                         {serieVideos.length > 0 && <MoreVideos dataVideos={serieVideos} />}
-                        <div className={"seasons"}>
+                        <section className={"seasons"}>
                             <div className={'header'}>
                                 <h5>Seasons</h5>
                             </div>
                             <SeasonsComponent seasons={serie.seasons} />
-                        </div>
-                        <div className={'authors-and-info'}>
+                        </section>
+                        <section className={'authors-and-info'}>
                             <div className={'authors-and-info-section'}>
                                 {serie.hasOwnProperty('created_by') && serie.created_by.length > 0 && <AuthorComponent data={serie} />}
                                 <AdditionalInformationComponent data={serie} />
                             </div>
-                        </div>
+                        </section>
                         {seriesRecommended.length > 0 && <RecommendedComponent dataRecommended={seriesRecommended} />}
-                    </div>
+                    </section>
             }
             <Footer isLoading={isLoading} />
-        </div>
+        </main>
     );
 }
 

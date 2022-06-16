@@ -97,11 +97,11 @@ const ActorsSection = ({popularActors}) => {
     }
 
     return (
-        <div className={'actor-container'}>
+        <section className={'actor-container'}>
             <Splide options={mainSliderOptions}>
                 <ActorsBody popularActors={popularActors} />
             </Splide>
-        </div>
+        </section>
     );
 }
 

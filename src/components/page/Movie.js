@@ -39,19 +39,19 @@ const Movie = ({movies, loadMoviesData}) => {
     }, [stopLoading])
 
     return (
-        <div className={'movie-page-container'}>
+        <main className={'movie-page-container'}>
             {
                 movie.length === 0 && movieVideos.length === 0 ? <Spinner /> :
-                <div className={"container movie-container"}>
+                <section className={"container movie-container"}>
                     <TitleComponent data={movie} />
                     <MenuComponent data={movie} />
                     <PosterAndVideo data={movie} dataVideos={movieVideos} />
                     {movieVideos.length > 0 && <MoreVideos dataVideos={movieVideos} />}
                     {recommended.length > 0 && <RecommendedComponent dataRecommended={recommended} />}
-                </div>
+                </section>
             }
             <Footer isLoading={isLoading} />
-        </div>
+        </main>
     );
 }
 

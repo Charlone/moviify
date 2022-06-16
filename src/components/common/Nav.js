@@ -192,7 +192,7 @@ const Nav = ({activeSlug, viewRequested, loadViewRequested, loadActiveSlug}) => 
     }
 
     return (
-        <div className={"App-header"}>
+        <header className={"App-header"}>
             <nav className={"navbar navbar-expand-lg navbar-light"}>
                 <div className={"navbar-brand-container"} onClick={handleClick}>
                     <NavLink to={"/"} className={"navbar-brand"}>
@@ -212,7 +212,7 @@ const Nav = ({activeSlug, viewRequested, loadViewRequested, loadActiveSlug}) => 
                     <SearchComponent />
                 </div>
             </nav>
-        </div>
+        </header>
     );
 }
 

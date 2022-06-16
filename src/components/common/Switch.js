@@ -14,14 +14,14 @@ class Switch extends React.Component {
 
     render() {
         return (
-            <div className={"switch-container align-self-end"}>
+            <section className={"switch-container align-self-end"}>
                 <h6 className={"text-uppercase"}><strong>Movies</strong></h6>
                 <label className="switch">
                     <input type="checkbox" name={"view-requested"} onChange={this.handleOnChange} checked={this.props.viewRequested !== 'movies' ? true : false} />
                     <span className="slider round"></span>
                 </label>
                 <h6 className={"text-uppercase"}><strong>Series</strong></h6>
-            </div>
+            </section>
         );
     }
 }

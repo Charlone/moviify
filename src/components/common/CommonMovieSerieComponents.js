@@ -13,7 +13,7 @@ export const truncateText = (text, length) => {
 
 export const TitleComponent = ({data}) => {
     return (
-        <div className={"movie-title"}>
+        <section className={"movie-title"}>
             <h3 className={"movie-title-header"}>
                 <strong>
                     {data.title ? data.title : data.name}
@@ -22,13 +22,13 @@ export const TitleComponent = ({data}) => {
             {data.tagline ? (<span>{data.tagline}</span>) : null}
             {data.tagline && data.homepage ? (<span> - </span>) : null}
             {data.homepage ? (<span><a className={"text-white text-decoration-none"} href={data.homepage} target={"_blank"}>{data.homepage}</a></span>) : null}
-        </div>
+        </section>
     )
 }
 
 export const MenuComponent = ({data}) => {
     return (
-        <div className={"movie-menu-bar"}>
+        <section className={"movie-menu-bar"}>
             <div className={"genre-container"}>
                 <Genres genres={data.genres} />
             </div>
@@ -98,13 +98,13 @@ export const MenuComponent = ({data}) => {
                 </h6>
                 <span className={"text-uppercase"}>{data.hasOwnProperty('spoken_languages') ? data.spoken_languages.map(language => `${language.iso_639_1} `) ?? "TBA" : null}</span>
             </div>
-        </div>
+        </section>
     )
 }
 
 export const PosterAndVideo = ({data, dataVideos}) => {
     return (
-        <div className={"movie-body mt-3"}>
+        <section className={"movie-body mt-3"}>
             <div className={"movie-info"}>
                 <div className={"poster"}>
                     <img width={data.poster_path === null ? '300px' : null} height={data.poster_path === null ? "450px" : null} src={data.poster_path !== null ? process.env.REACT_APP_API_POSTER_PATH + data.poster_path : '/no_image.png'} alt={data.name ? data.name : data.title}/>
@@ -120,23 +120,23 @@ export const PosterAndVideo = ({data, dataVideos}) => {
             <div className={'overview-text'}>
                 <p>{data.overview}</p>
             </div>
-        </div>
+        </section>
     )
 }
 
 export const MoreVideos = ({dataVideos}) => {
     return (
-        <div className={"more-videos"}>
+        <section className={"more-videos"}>
             <Splide options={sliderOptions}>
                 <MoreVideosSlider moreVideos={dataVideos} width={"33.33%"} height={"400px"} />
             </Splide>
-        </div>
+        </section>
     )
 }
 
 export const AuthorComponent = ({data}) => {
     return (
-        <div className={"author-section"}>
+        <section className={"author-section"}>
             <h5 className={"header"}>
                 <strong>
                     {data.created_by.length > 1 ? "Authors" : "Author"}
@@ -145,22 +145,22 @@ export const AuthorComponent = ({data}) => {
             <div className={'author d-flex'}>
                 <Author createdBy={data.created_by} />
             </div>
-        </div>
+        </section>
     )
 }
 
 export const RecommendedComponent = ({dataRecommended}) => {
     return (
-        <div className={"recommendations"}>
+        <section className={"recommendations"}>
             <h4 className={'recommendations-header'}>Other titles you may like</h4>
             <CategorySection cards={dataRecommended} />
-        </div>
+        </section>
     )
 }
 
 export const AdditionalInformationComponent = ({data}) => {
     return (
-        <div className={"additional-info"}>
+        <section className={"additional-info"}>
             <h5 className={"header"}>
                 <strong>
                     Additional Information
@@ -174,7 +174,7 @@ export const AdditionalInformationComponent = ({data}) => {
                 {typeof data.last_episode_to_air !== 'undefined' ? <li>Last episode duration: {getDuration(data.last_episode_to_air.runtime)}</li> : null}
                 {typeof data.last_episode_to_air !== 'undefined' ? <li>Rating last episode: {parseFloat(data.last_episode_to_air.vote_average).toFixed(1)}</li> : null}
             </ul>
-        </div>
+        </section>
     );
 }
 
@@ -220,10 +220,10 @@ export const SeasonsComponent = ({seasons}) => {
     };
 
     return (
-        <div className={"seasons-body"}>
+        <section className={"seasons-body"}>
             <Splide options={options}>
                 <Seasons seasons={seasons} />
             </Splide>
-        </div>
+        </section>
     )
 }

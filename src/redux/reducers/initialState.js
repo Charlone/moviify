@@ -10,6 +10,7 @@ const initialState = {
         recommended: [],
         movie: [],
         movieVideos: [],
+        totalPages: 0,
     },
     series: {
         popularSeries: [],
@@ -19,6 +20,7 @@ const initialState = {
         serie: [],
         seriesRecommended: [],
         serieVideos: [],
+        totalPages: 0,
     },
     actors: {
         popularActors: [],

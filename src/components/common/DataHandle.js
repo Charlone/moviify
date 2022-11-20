@@ -13,10 +13,14 @@ const dataCategories = [
     "popularActors",
 ]
 
-export function FetchAll(functionLoader, dataObject, category) {
+export function FetchAll(functionLoader, dataObject, category, page = null) {
     if (dataCategories.includes(category)) {
-        if (dataObject[`${category}`].length === 0) {
-            functionLoader(category);
+        if (page) {
+            functionLoader(category, null, page);
+        } else {
+            if (dataObject[`${category}`].length === 0) {
+                functionLoader(category);
+            }
         }
     }
 }

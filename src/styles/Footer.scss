@@ -18,5 +18,12 @@
     color: $font-color;
     padding: 10px;
     font-size: small;
+
+    span {
+      a {
+        color: #FFFFFF;
+        text-decoration: none;
+      }
+    }
   }
 }

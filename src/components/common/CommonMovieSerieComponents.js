@@ -7,10 +7,6 @@ import CategorySection from "./CategorySection";
 import Author from "./Author";
 import Card from "./Card";
 
-export const truncateText = (text, length) => {
-    return text.length > length ? text.substring(0, length) + '...' : text;
-}
-
 export const TitleComponent = ({data}) => {
     return (
         <section className={"movie-title"}>

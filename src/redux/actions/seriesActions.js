@@ -30,11 +30,11 @@ export function loadSerieVideosSuccess(serieVideos) {
     return { type: types.GET_SERIE_VIDEOS_SUCCESS, serieVideos }
 }
 
-export function loadSeriesData(type, serieId = null) {
+export function loadSeriesData(type, serieId = null, page) {
     return async function(dispatch) {
         dispatch(beginApiCall());
         return await seriesApi
-            .getSeries(type, serieId)
+            .getSeries(type, serieId, page)
             .then((serieData) => {
                 switch (type) {
                     case "airingToday": dispatch(loadAiringTodaySeriesSuccess(serieData)); break;

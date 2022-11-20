@@ -15,27 +15,26 @@ const Movie = ({movies, loadMoviesData}) => {
     const [ isLoading, setIsLoading ] = useState(true);
 
     useEffect(() => {
-        return () => {
-            if (movie.length === 0) {
-                loadMoviesData('movie', id);
-            }
-
-            if (movieVideos.length === 0) {
-                loadMoviesData('movieVideos', id);
-            }
-
-            if (stopLoading) {
-                return;
-            } else if (recommended.length === 0) {
-                loadMoviesData('recommended', id);
-                setStopLoading(true);
-            }
-
-            setTimeout(() => {
-                setIsLoading(false);
-            }, 500)
-
+        if (movie.length === 0) {
+            loadMoviesData('movie', id);
         }
+
+        if (movieVideos.length === 0) {
+            loadMoviesData('movieVideos', id);
+        }
+
+        if (stopLoading) {
+            return;
+        } else if (recommended.length === 0) {
+            loadMoviesData('recommended', id);
+            setStopLoading(true);
+        }
+
+        setTimeout(() => {
+            setIsLoading(false);
+        }, 500)
+
+        return () => {}
     }, [stopLoading])
 
     return (

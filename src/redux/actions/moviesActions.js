@@ -30,11 +30,11 @@ export function loadMovieVideosSuccess(movieVideos) {
     return { type: types.GET_MOVIE_VIDEOS_SUCCESS, movieVideos }
 }
 
-export function loadMoviesData(type, movieId = null) {
+export function loadMoviesData(type, movieId = null, page) {
     return async function(dispatch) {
         dispatch(beginApiCall());
         return await moviesApi
-            .getMovies(type, movieId)
+            .getMovies(type, movieId, page)
             .then((movieData) => {
                 switch (type) {
                     case "nowPlaying": dispatch(loadNowPlayingMoviesSuccess(movieData)); break;

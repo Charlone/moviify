@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import { loadActiveSlug } from "../../redux/actions/activeSlugActions";
 import { loadViewRequested } from "../../redux/actions/viewRequestedActions";
 import { loadActorsData } from "../../redux/actions/actorsActions";
+import { FetchAll } from "../common/DataHandle";
 import ActorsSection from "../common/ActorsSection";
 import Spinner from "../common/Spinner";
 import Footer from "../common/Footer";
@@ -13,13 +14,13 @@ const Actors = ({actors, loadActorsData}) => {
     const [ isLoading, setIsLoading ] = useState(true);
 
     useEffect(() => {
-        return () => {
-            if (popularActors.length === 0) {
-                loadActorsData('popularActors')
-            }
-            setIsLoading(false)
-        };
-    }, [popularActors, loadActorsData]);
+        if (popularActors.length === 0) {
+            FetchAll(loadActorsData, actors, 'popularActors');
+            setIsLoading(false);
+        }
+
+        return () => {};
+    }, [popularActors, actors]);
 
 
     return (
@@ -28,7 +29,7 @@ const Actors = ({actors, loadActorsData}) => {
                 <h4 className={"subheading text-white mt-4"}>Most Popular</h4>
                 {!popularActors.length && <Spinner />}
                 {
-                    popularActors.length &&
+                    popularActors.length > 0 &&
                     <section className={"popular-actors-section"}>
                         <ActorsSection popularActors={popularActors} />
                     </section>

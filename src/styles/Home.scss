@@ -18,6 +18,10 @@
         width: 100%;
         min-height: 50px;
       }
+
+      .categories-section-container {
+        margin: 1.5rem 0 0 0;
+      }
     }
   }
 }
@@ -26,5 +30,17 @@
   .splide__arrow:focus-visible {
     outline: 3px solid $base-secondary-color;
     outline-offset: 3px;
+  }
+}
+
+@media screen and (max-width: 1280px) {
+  .home-container {
+    .section {
+      .main-container {
+        .categories-section-container {
+          margin: 0;
+        }
+      }
+    }
   }
 }

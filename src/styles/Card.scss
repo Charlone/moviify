@@ -8,6 +8,7 @@
     border-bottom: 1px solid $base-secondary-color;
     box-shadow: 1px 1px 5px 0 $blend-color;
     min-height: 256.99px;
+    height: 301.98px;
   }
 
   .card-body {
@@ -51,6 +52,14 @@
         background-color: $header-font-color;
         opacity: 1;
       }
+    }
+  }
+}
+
+@media screen and (max-width: 1280px) {
+  .card {
+    .card-img-top {
+      height: 256.99px;
     }
   }
 }

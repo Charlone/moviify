@@ -39,8 +39,8 @@ const Home = ({activeSlug, movies, series, loadMoviesData, loadSeriesData }) => 
                         <div className={"category-header-container"}>
                             <Switch />
                         </div>
-                        {Object.keys(movies).includes(activeSlug) && movies[`${activeSlug}`] ? movies[`${activeSlug}`].length === 0 ? <Spinner /> : <div className={"animate__animated animate__backInUp"}><CategorySection cards={movies[`${activeSlug}`]} /></div> : null}
-                        {Object.keys(series).includes(activeSlug) && series[`${activeSlug}`] ? series[`${activeSlug}`].length === 0 ? <Spinner /> : <div className={"animate__animated animate__backInUp"}><CategorySection cards={series[`${activeSlug}`]} /></div> : null}
+                        {Object.keys(movies).includes(activeSlug) && movies[`${activeSlug}`] ? movies[`${activeSlug}`].length === 0 ? <Spinner /> : <div className={"categories-section-container animate__animated animate__backInUp"}><CategorySection cards={movies[`${activeSlug}`]} activeSlug={activeSlug} /></div> : null}
+                        {Object.keys(series).includes(activeSlug) && series[`${activeSlug}`] ? series[`${activeSlug}`].length === 0 ? <Spinner /> : <div className={"categories-section-container animate__animated animate__backInUp"}><CategorySection cards={series[`${activeSlug}`]} activeSlug={activeSlug} /></div> : null}
                     </div>
                 </section>
             </div>

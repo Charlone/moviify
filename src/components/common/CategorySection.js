@@ -3,7 +3,7 @@ import { truncateText } from "./DataHandle";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import '@splidejs/react-splide/css';
 
-const CategorySection = ({cards}) => {
+const CategorySection = ({cards, activeSlug}) => {
     const sliderOptions = {
         rewind: true,
         gap: "1rem",
@@ -36,7 +36,36 @@ const CategorySection = ({cards}) => {
                 />
             </SplideSlide>
         );
-    })
+    });
+
+    if (activeSlug) {
+        cardData.push(
+            <SplideSlide key={9999999}>
+                <a href={`/${activeSlug}`} className="text-center" style={{
+                    color: '#FFFFFF',
+                    textDecoration: "none",
+                    fontWeight: 900,
+                    fontStyle: 'Anton, sans-serif',
+                    fontSize: "xxx-large",
+                    lineHeight: 1,
+                    textShadow: '2px 2px black'
+                }}>
+                    <div className="card h-100" style={{
+                        backgroundColor: '#E71'
+                    }}>
+                        <div className="card-body" style={{
+                            display: "flex",
+                            justifyContent: "center",
+                            alignContent: "center",
+                            alignItems: "center"
+                        }}>
+                            SHOW MORE
+                        </div>
+                    </div>
+                </a>
+            </SplideSlide>
+        )
+    }
 
     return (
         <>

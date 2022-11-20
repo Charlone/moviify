@@ -2,7 +2,7 @@
 
 .movie-page-container {
   .movie-container {
-    min-height: 100vh;
+    min-height: calc(100vh - 175px);
     color: $font-color;
 
     .movie-title {
@@ -51,6 +51,12 @@
     .movie-body {
       .movie-info {
         display: flex;
+
+        .poster {
+          img {
+            height: 450px;
+          }
+        }
 
         .overview {
           width: 100%;

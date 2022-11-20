@@ -21,6 +21,10 @@ export function FetchAll(functionLoader, dataObject, category) {
     }
 }
 
+export const truncateText = (text, length) => {
+    return text.length > length ? text.substring(0, length) + '...' : text;
+}
+
 export const sliderOptions = {
     rewind: true,
     gap: "1rem",

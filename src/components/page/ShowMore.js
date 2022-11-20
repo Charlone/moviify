@@ -114,7 +114,7 @@ const ShowMore = ({ activeSlug, movies, series, loadMoviesData, loadSeriesData, 
                     {Object.keys(series).includes(activeSlug) && series[`${activeSlug}`] ? series[`${activeSlug}`].length === 0 ? <Spinner /> : <div className={"categories-section-container animate__animated animate__backInUp"}><ShowCards /></div> : null}
                 </section>
                 <section className={"pages-section"}>
-                    <Pagination />
+                    {!isLoading && <Pagination />}
                 </section>
             </div>
             <Footer isLoading={isLoading}/>

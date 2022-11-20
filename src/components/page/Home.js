@@ -13,20 +13,22 @@ import { FetchAll } from "../common/DataHandle";
 import 'animate.css';
 import "../../styles/Home.scss";
 
-const Home = ({activeSlug, movies, series, loadMoviesData, loadSeriesData, loadActorsData }) => {
-    const { nowPlaying, popularMovies, topMovies, upcoming } = movies;
-    const { popularSeries, topSeries, onTheAir, airingToday } = series;
+const Home = ({activeSlug, movies, series, loadMoviesData, loadSeriesData }) => {
     const [ isLoading, setIsLoading ] = useState(true);
 
     useEffect(() => {
-        return () => {
-            FetchAll(loadMoviesData, loadSeriesData, loadActorsData);
-
-            setTimeout(() => {
-                setIsLoading(false);
-            }, 1000);
+        if (Object.keys(movies).includes(activeSlug)) {
+            setTimeout(() => FetchAll(loadMoviesData, movies, activeSlug), 500);
+        } else {
+            setTimeout(() => FetchAll(loadSeriesData, series, activeSlug), 500);
         }
-    }, [loadMoviesData, loadSeriesData, loadActorsData]);
+
+        setTimeout(() => {
+            setIsLoading(false);
+        }, 1000);
+
+        return () => {}
+    }, [activeSlug, movies, series]);
 
     return (
         <main className={"home"}>
@@ -37,14 +39,8 @@ const Home = ({activeSlug, movies, series, loadMoviesData, loadSeriesData, loadA
                         <div className={"category-header-container"}>
                             <Switch />
                         </div>
-                        {activeSlug === 'popularMovies' && popularMovies.length === 0 ? <Spinner /> : (activeSlug === 'popularMovies' && <div className={"animate__animated animate__backInUp"}><CategorySection cards={popularMovies} /></div>)}
-                        {activeSlug === 'nowPlaying' && nowPlaying.length === 0 ? <Spinner /> : (activeSlug === 'nowPlaying' && <div className={"animate__animated animate__backInUp"}><CategorySection cards={nowPlaying} /></div>)}
-                        {activeSlug === 'topMovies' && topMovies.length === 0 ? <Spinner /> : (activeSlug === 'topMovies' && <div className={"animate__animated animate__backInUp"}><CategorySection cards={topMovies} /></div>)}
-                        {activeSlug === 'upcoming' && upcoming.length === 0 ? <Spinner /> : (activeSlug === 'upcoming' && <div className={"animate__animated animate__backInUp"}><CategorySection cards={upcoming} /></div>)}
-                        {activeSlug === 'popularSeries' && popularSeries.length === 0 ? <Spinner /> : (activeSlug === 'popularSeries' && <div className={"animate__animated animate__backInUp"}><CategorySection cards={popularSeries} /></div>)}
-                        {activeSlug === 'topSeries' && topSeries.length === 0 ? <Spinner /> : (activeSlug === 'topSeries' && <div className={"animate__animated animate__backInUp"}><CategorySection cards={topSeries} /></div>)}
-                        {activeSlug === 'onTheAir' && onTheAir.length === 0 ? <Spinner /> : (activeSlug === 'onTheAir' && <div className={"animate__animated animate__backInUp"}><CategorySection cards={onTheAir} /></div>)}
-                        {activeSlug === 'airingToday' && airingToday.length === 0 ? <Spinner /> : (activeSlug === 'airingToday' && <div className={"animate__animated animate__backInUp"}><CategorySection cards={airingToday} /></div>)}
+                        {Object.keys(movies).includes(activeSlug) && movies[`${activeSlug}`] ? movies[`${activeSlug}`].length === 0 ? <Spinner /> : <div className={"animate__animated animate__backInUp"}><CategorySection cards={movies[`${activeSlug}`]} /></div> : null}
+                        {Object.keys(series).includes(activeSlug) && series[`${activeSlug}`] ? series[`${activeSlug}`].length === 0 ? <Spinner /> : <div className={"animate__animated animate__backInUp"}><CategorySection cards={series[`${activeSlug}`]} /></div> : null}
                     </div>
                 </section>
             </div>
@@ -57,9 +53,8 @@ Home.propTypes = {
     activeSlug: PropTypes.string.isRequired,
     viewRequested: PropTypes.string.isRequired,
     movies: PropTypes.object.isRequired,
-    loadMoviesData: PropTypes.func.isRequired,
-    loadSeriesData: PropTypes.func.isRequired,
-    loadActorsData: PropTypes.func.isRequired,
+    series: PropTypes.object.isRequired,
+    actors: PropTypes.object.isRequired,
 }
 
 function mapStateToProps(state) {

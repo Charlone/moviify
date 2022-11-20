@@ -1,33 +1,24 @@
 import { SplideSlide } from "@splidejs/react-splide";
 import YoutubeEmbed from "./YoutubeEmbed";
 
-export function FetchAll(loadMoviesData, loadSeriesData, loadActorsData) {
-    let dataCategories = [
-        "popularMovies",
-        "topMovies",
-        "upcoming",
-        "nowPlaying",
-        "popularSeries",
-        "topSeries",
-        "onTheAir",
-        "airingToday",
-        "popularActors",
-    ]
+const dataCategories = [
+    "popularMovies",
+    "topMovies",
+    "upcoming",
+    "nowPlaying",
+    "popularSeries",
+    "topSeries",
+    "onTheAir",
+    "airingToday",
+    "popularActors",
+]
 
-    dataCategories.forEach(category => {
-        switch (category) {
-            case "popularMovies":
-            case "topMovies":
-            case "upcoming":
-            case "nowPlaying": loadMoviesData(category); break;
-            case "popularSeries":
-            case "topSeries":
-            case "onTheAir":
-            case "airingToday": loadSeriesData(category); break;
-            case "popularActors": loadActorsData(category); break;
-            default: return;
+export function FetchAll(functionLoader, dataObject, category) {
+    if (dataCategories.includes(category)) {
+        if (dataObject[`${category}`].length === 0) {
+            functionLoader(category);
         }
-    })
+    }
 }
 
 export const sliderOptions = {

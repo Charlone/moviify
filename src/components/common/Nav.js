@@ -18,16 +18,21 @@ const Nav = ({activeSlug, viewRequested, loadViewRequested, loadActiveSlug}) => 
         const view = e.target.dataset.slug;
 
         switch (view) {
-            case 'actors': break;
-            case 'home': loadViewRequested(viewRequested); break;
+            case 'actors':
+                break;
+            case 'home':
+                loadViewRequested(viewRequested);
+                break;
             case 'movies':
             case 'series':
                 loadViewRequested(view);
                 view === 'series'
                     ? loadActiveSlug('popularSeries')
                     : loadActiveSlug('popularMovies');
-            break;
-            default: loadActiveSlug(view); break;
+                break;
+            default:
+                loadActiveSlug(view);
+                break;
         }
     }
 
@@ -69,7 +74,7 @@ const Nav = ({activeSlug, viewRequested, loadViewRequested, loadActiveSlug}) => 
                         `<li className="search-result">
                          <a href="/${category}/${result.id}">
                              <div>
-                                 <img class="result-image" src="${category === 'actor' ? (result.profile_path !== null ? process.env.REACT_APP_API_AUTHOR_PATH + result.profile_path : "/no_image.png") : (result.poster_path !== null ? process.env.REACT_APP_API_POSTER_PATH + result.poster_path : "/no_image.png")}" />
+                                 <img alt="result" class="result-image" src="${category === 'actor' ? (result.profile_path !== null ? process.env.REACT_APP_API_AUTHOR_PATH + result.profile_path : "/no_image.png") : (result.poster_path !== null ? process.env.REACT_APP_API_POSTER_PATH + result.poster_path : "/no_image.png")}" />
                                  <p>${result.title ? result.title : result.name}</p>
                              </div>
                          </a>
@@ -82,7 +87,7 @@ const Nav = ({activeSlug, viewRequested, loadViewRequested, loadActiveSlug}) => 
                     `<li className="search-result">
                          <a href="#">
                              <div>
-                                 <img class="result-image" src="/no_image.png" />
+                                 <img alt="result" class="result-image" src="/no_image.png" />
                                  <p>No ${category}s have been found</p>
                              </div>
                          </a>
